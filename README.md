@@ -10,9 +10,9 @@
 </p>
 <!-- markdownlint-enable MD033 -->
 
-Trellis helps you capture the process behind a report, review, handoff, or file
-task—or discover one in your own work sessions—and turn it into a clear guide
-or small local tool you can use again.
+Trellis is a plugin for agentic work tools that helps you capture the process
+behind a report, review, handoff, or file task—and turn it into a reusable guide
+or small local tool.
 
 After you approve it, Trellis stores the result in a handbook beside the work,
 where you and your AI assistant can refer to it later.
