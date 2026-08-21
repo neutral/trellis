@@ -1,0 +1,5 @@
+{
+  "name": "trellis",
+  "version": "0.5.0",
+  "description": "Build project Playbooks agents can use to reliably repeat work."
+}

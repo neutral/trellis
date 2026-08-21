@@ -1,226 +1,147 @@
 # Trellis
 
-<!-- markdownlint-disable MD033 -->
-<p align="center">
-  <img
-    src="assets/trellis-transparent.svg"
-    alt="A young vine growing on a fan trellis"
-    width="480"
-  >
-</p>
-<!-- markdownlint-enable MD033 -->
+Trellis helps you build Playbooks your agents can use to reliably repeat work you have done
+before.
 
-Trellis is a plugin for agentic work tools that helps you capture the process
-behind a report, review, handoff, or file task—and turn it into a reusable guide
-or small local tool.
+Each Playbook is a project-local guide to one real task. It gives an agent the trigger, outcome,
+method, judgment calls, boundaries, and verification needed to do the work again without relying
+on the original chat or one person's memory.
 
-After you approve it, Trellis stores the result in a handbook beside the work,
-where you and your AI assistant can refer to it later.
+## Commands
 
-Start by asking Trellis. You can:
+- **`/trellis-init`** creates or adopts `playbooks/` or another project-local folder you choose.
+- **`/capture-playbook`** creates or revises the exact Playbook you describe.
+- **`/discover-playbooks`** examines only sessions you select and returns ready-to-edit
+  `/capture-playbook ...` recommendations without writing anything.
+- **`/trellis-audit`** reviews Playbooks and recommends improvements without executing or changing
+  them.
 
-- **Describe the method directly.** Tell Trellis what you want it to create.
-- **Review selected work.** Ask Trellis to examine the current conversation or
-  earlier conversations you identify.
-- **Combine both.** Provide the method you want and ask Trellis to refine it
-  using selected work.
+Playbooks are the only user-facing Trellis artifact. Internal tools can live under the selected
+Playbooks folder in `_cli/` when a Playbook needs a small fixed local-file operation. A project can
+also explicitly ask an agent for a standalone script beside a Playbook when a broader design is
+appropriate.
 
-For example:
+## Install
 
-> Use Trellis to create a Playbook for handing off a client report. Include
-> checks for the audience, unresolved assumptions, source support, and decisions
-> that still need an owner.
+Trellis bundles its four Agent Skills as one plugin so they install and update together. Use your
+host's native plugin flow when available, then start a new agent session.
 
-Or:
+### Native plugin installation (recommended)
 
-> Use Trellis to review this conversation and suggest any process that would
-> be useful in similar work.
+#### ChatGPT
 
-Before anything is saved, Trellis shows the complete proposal and the exact
-files it would create or change. You can edit, save, or skip each proposal. If
-the material does not support a useful Playbook or Action, Trellis says so.
+Trellis 0.5.0 is available in the [ChatGPT Plugins
+Directory](https://chatgpt.com/plugins/plugins_6a630817fcdc8191a6e0114bbd61bc33).
 
-[Read how Trellis identifies and evaluates candidates](METHODOLOGY.md).
+To install it in ChatGPT on the web or in the desktop app, open **Plugins**, search for **Trellis**,
+open its listing, and select the **+** button. Start a new chat after installation; type `@Trellis`
+whenever you want to choose the plugin or one of its skills explicitly. See the
+[official ChatGPT plugin instructions](https://learn.chatgpt.com/docs/plugins#install-and-use-a-plugin)
+for the full flow.
 
-## How it works
+#### Codex
 
-1. Describe the method you want, select work for Trellis to review, or do both.
-2. Review the proposed Playbook or Action and its exact file effects.
-3. Edit, approve, or skip the proposal.
+Add the Trellis marketplace and install the plugin with the [Codex
+CLI](https://developers.openai.com/plugins/build/plugins):
 
-When reviewing conversations, Trellis uses the current conversation by default
-or one or more exact chat or session IDs that you provide and your AI tool can
-retrieve. It does not scan ambient conversation history. A direct description
-needs no completed example.
+```sh
+codex plugin marketplace add neutral/trellis
+codex plugin add trellis@trellis
+```
 
-Trellis can use corrections, exceptions, and unsuccessful attempts in the
-selected work, but it does not save conversation transcripts or their IDs in
-the handbook.
+Codex plugins work in Codex CLI and the ChatGPT desktop app. The Codex IDE extension does not
+currently support plugins.
 
-## What Trellis creates
+#### Claude Code
 
-Trellis uses two formats:
-
-- A **Playbook** is a guide for work that depends on judgment. It records what
-  to examine, how to choose between possible paths, which exceptions matter,
-  and how to verify the result.
-- An **Action** is a local tool for one well-defined file task. It has specific
-  inputs, limits, checks, and recovery behavior.
-
-Reviewing a report against changing business priorities is a Playbook. Turning
-an approved data export into the same clean local format each month may be an
-Action. Some work produces both; Trellis keeps them separate so the decisions
-remain visible and the file task can be tested independently.
-
-You can ask for either one directly. A method supported by only one example
-remains Provisional until it works in genuinely different situations. Every
-new Action begins as Draft and Untested.
-
-## When to use Trellis
-
-Trellis may help when:
-
-- a recurring report, brief, or review now follows a reliable process;
-- a correction revealed a check that will matter again;
-- an exception changed how the work should be handled;
-- a handoff repeatedly requires the same explanation;
-- a stable local file task has clear inputs and an observable result; or
-- you already know the guide or local tool you want Trellis to create.
-
-Example requests:
-
-- “Use Trellis to create a Playbook for handing off a client report. Check the
-  audience, assumptions, sources, and unresolved decisions.”
-- “Use Trellis to create a read-only Action that checks Markdown files under a
-  folder I name and reports duplicate headings without changing anything.”
-- “Use Trellis to create a Playbook from the review approach we just corrected,
-  without the client-specific details.”
-- “Use Trellis to compare chats `<chat-id>` and `<chat-id>` and propose only
-  methods supported by both.”
-- “Use Trellis to draft a Playbook using the method I described and this
-  conversation.”
-
-## Review and approval
-
-Trellis does not save anything automatically. Before changing a file, it
-shows the complete proposal and its file effects.
-
-Saving an Action does not install dependencies, test it, run it, or mark it
-active. Each step requires a separate decision.
-
-Trellis does not reorganize your folders, rewrite your AI instructions, make
-Git commits, publish, or send your work elsewhere. It has no hosted backend,
-account system, advertising, or telemetry. The AI tool and installer you use
-operate under their own terms and privacy policies.
-
-## Where Trellis stores files
-
-Approved Playbooks and Actions are documented in a handbook beside the work:
+Run these commands inside [Claude Code](https://code.claude.com/docs/en/discover-plugins):
 
 ```text
-_handbook/
-  overview.md    the place to start
-  playbooks/     guides for work that needs judgment
-  actions/       readable pages for local file tools
+/plugin marketplace add neutral/trellis
+/plugin install trellis@trellis
 ```
 
-Trellis manages only its marked pages and index section. Other files in the
-handbook remain unchanged.
+Claude Code namespaces plugin skills with `trellis:`. For example, run
+`/trellis:trellis-init` to initialize a project after installing the plugin.
 
-Supporting files for Actions live under `_handbook/_cli/`. Temporary plans and
-intermediate files may be placed under `_handbook/_scratch/`, whose contents
-are ignored by Git.
+#### Gemini CLI
 
-## Install Trellis
-
-Trellis includes two internal skills: `capture` creates Playbooks and Actions,
-while `audit` reviews the handbook. Install both complete skill folders. In
-ordinary use, address Trellis by name; it selects the skill that matches the
-request.
-
-If terminal commands are unfamiliar, ask the person who manages your AI tools
-to install them.
-
-### Cross-tool installer
-
-The cross-tool [skills installer](https://github.com/vercel-labs/skills) can
-install Trellis and let you choose the AI tool and installation location:
+Install the repository as a [Gemini CLI extension](https://geminicli.com/docs/extensions/reference/):
 
 ```sh
-npx skills add neutral/trellis
+gemini extensions install https://github.com/neutral/trellis
 ```
 
-This method requires Node.js and `npx`. The installer is independent of
-Trellis. Review it and the contents of [`skills/`](skills/) before installing.
+Run `gemini extensions update trellis` when you want to update an existing installation.
 
-### GitHub CLI
+### Standalone Agent Skills
 
-If you use GitHub CLI:
+Use a standalone installer when a native plugin is unavailable or when you want the portable
+skills without the plugin wrapper.
+
+#### Vercel Skills CLI
+
+The [Vercel Skills CLI](https://skills.sh/docs/cli) runs through `npx` and prompts you to choose
+from the supported agents it detects:
 
 ```sh
-gh skill install neutral/trellis
+npx skills add neutral/trellis --skill "*" --global
 ```
 
-### Manual installation
+#### GitHub CLI
 
-Download or clone this repository. Copy the complete `skills/capture` and
-`skills/audit` folders into the project or personal skills location used by
-your AI tool. The exact location varies by tool.
+The [`gh skill` command](https://cli.github.com/manual/gh_skill) is currently in preview. With a
+recent GitHub CLI, run the command for your agent:
 
-## Review the handbook
+```sh
+# Codex
+gh skill install neutral/trellis --all --agent codex --scope user
 
-As the handbook grows, Trellis can identify entries that may be unclear,
-overlapping, broken, or outdated:
+# Claude Code
+gh skill install neutral/trellis --all --agent claude-code --scope user
 
-> Use Trellis to audit the handbook and suggest what needs attention.
+# Cursor
+gh skill install neutral/trellis --all --agent cursor --scope user
 
-The audit is read-only. It does not edit the handbook or run Actions.
+# Gemini CLI
+gh skill install neutral/trellis --all --agent gemini-cli --scope user
+```
 
-## Technical details
+To install the standalone skills only in the current project, omit `--global` from the Vercel
+command or replace `--scope user` with `--scope project` in a GitHub command.
 
-Trellis follows the
-[Agent Skills specification](https://agentskills.io/specification), so the same
-skill folders can work across compatible AI tools. Installation and access to
-earlier conversations vary by tool.
+## Initialize
 
-Creating Playbooks, auditing the handbook, and manual installation do not
-require Node. Handbook initialization and Audit require CPython 3.11 or newer;
-the helpers use only Python's standard library and install no packages. Most
-users do not need the following details.
+Run `/trellis-init`. It proposes `playbooks/` by default, lets you choose or adopt another folder,
+and returns an optional `AGENTS.md` snippet for you to place manually.
 
-<!-- markdownlint-disable MD033 -->
-<details>
-<summary>Action files, safety, and Node requirements</summary>
+## Create a Playbook
 
-The first approved save creates `_handbook/_scratch/` for plans and temporary
-material. The first approved Action adds a `trellis` launcher at the folder root
-and supporting files under `_handbook/_cli/`. A folder containing only
-Playbooks gets neither the launcher nor Node or npm files.
+Give `/capture-playbook` a concrete description:
 
-Git ignores the contents of `_scratch/`, but this does not make them private,
-secure, or invisible to backup and file-sync tools. Saved Action plans remain
-there until you delete them.
+```text
+/capture-playbook Create a Playbook for reviewing a small plugin release before tagging it. Check
+source and generated packages, stop when generated output is stale, and finish with a clear go or
+no-go decision backed by evidence.
+```
 
-An Action works only with the local files specifically named for its task. It
-cannot use the network, run other applications or shell commands, send or
-publish information, delete files, change permissions, or make important
-decisions for the user. File creation and updates begin with an exact,
-reviewable plan; applying that plan is a separate decision. The runner adds
-safeguards but is not an operating-system security sandbox.
+## Discover candidates
 
-Creating or running Actions uses Node. Discovery and previews require Node 18
-or newer. Running an Action requires Node 22.23.1 or newer within the Node 22
-line, or Node 24.18.0 or newer within the Node 24 line. Other major lines are
-not accepted until reviewed.
+Run `/discover-playbooks` on the current session or exact prior session IDs your host can retrieve.
+It returns one or more self-contained `/capture-playbook ...` suggestions. Review or edit them,
+then run the suggestions you want yourself.
 
-</details>
-<!-- markdownlint-enable MD033 -->
+## Audit
 
-## Policies and license
+Run `/trellis-audit` and name the Playbooks folder to review. The audit is read-only and advisory.
+It respects custom owner files and project-owned scripts.
 
-For the exact rules, see the [privacy policy](PRIVACY.md),
-[distribution terms](TERMS.md), [Capture skill](skills/capture/SKILL.md), and
-[Audit skill](skills/audit/SKILL.md).
+## Methodology, privacy, and terms
 
-Trellis is dedicated to the public domain under
-[CC0 1.0 Universal](LICENSE). It is offered without a support commitment.
+- [Methodology](METHODOLOGY.md)
+- [Privacy](PRIVACY.md)
+- [Terms](TERMS.md)
+
+## License
+
+Trellis is dedicated to the public domain under [CC0 1.0 Universal](LICENSE).

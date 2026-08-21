@@ -1,7 +1,0 @@
-#!/usr/bin/env node
-// trellis-action-cli-format: 4
-
-import("./_handbook/_cli/bin/trellis.mjs").catch((error) => {
-  console.error(`error: ${error.message}`);
-  process.exitCode = 2;
-});

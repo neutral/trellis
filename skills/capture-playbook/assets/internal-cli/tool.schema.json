@@ -1,0 +1,52 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:trellis:internal-tool:1",
+  "title": "Trellis internal Playbook tool",
+  "description": "A Playbook-owned declaration that selects one fixed local-file operation from the internal Trellis CLI.",
+  "type": "object",
+  "required": [
+    "format",
+    "playbook",
+    "id",
+    "title",
+    "description",
+    "operation"
+  ],
+  "properties": {
+    "format": {
+      "const": 1
+    },
+    "playbook": {
+      "$ref": "#/$defs/id"
+    },
+    "id": {
+      "$ref": "#/$defs/id"
+    },
+    "title": {
+      "$ref": "#/$defs/nonBlankString"
+    },
+    "description": {
+      "$ref": "#/$defs/nonBlankString"
+    },
+    "operation": {
+      "enum": [
+        "file.hash",
+        "files.compare",
+        "text.replace",
+        "json.set"
+      ]
+    }
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$"
+    },
+    "nonBlankString": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "\\S"
+    }
+  }
+}

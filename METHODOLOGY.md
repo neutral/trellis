@@ -1,237 +1,222 @@
-# How Trellis Identifies Reusable Work
+# How Trellis Creates and Discovers Playbooks
 
-Trellis does not require you to prove a method by performing it in a chat first.
-If you already know the Playbook or Action you want, ask Trellis to create it
-and describe what you need. Trellis can also look for candidates in work you
-select. This file explains both routes, the techniques behind them, and which
-parts are Trellis's own product design.
+Trellis separates explicit creation from reflective discovery:
 
-## You Can Lead, Or Trellis Can Look
+- **Capture** creates the specific Playbook the user requests.
+- **Discover** studies selected work and returns one or more self-contained Capture prompts.
 
-<!-- markdownlint-disable MD013 -->
-| Starting point | What you provide | What Capture does |
-| --- | --- | --- |
-| **Direct direction** | A goal, rough routine, draft, or exact Playbook or Action | Treats your words as the design brief, checks the shape, boundaries, verification, conflicts, and safety, then shows a proposal |
-| **Reflective discovery** | The current conversation or exact prior conversation IDs your agent host can retrieve | Reconstructs the selected work, looks for reusable decisions and mechanics, and shows the strongest bounded candidates |
-| **Hybrid refinement** | A candidate plus selected conversational work | Keeps your requested design separate from evidence, surfaces conflicts instead of silently choosing, then refines according to your direction |
-<!-- markdownlint-enable MD013 -->
+The separation keeps Capture predictable, makes reflection optional, and leaves the user in
+control of which inferred method becomes maintained project guidance.
 
-A direct description is authoritative about what you want. It is not proof that
-the method already works in varied situations. Capture therefore labels a new
-directly specified method **Provisional** unless there is operational evidence
-for broader use. A new Action is also **Draft** and **Untested**, regardless of
-how complete its specification is.
+## The reusable unit
 
-You do not need to supply conversation IDs for direct direction. Capture should
-ask for IDs only when you ask it to examine prior conversations and have not
-identified them.
+A Trellis Playbook owns one recognizable situation through one verified outcome. It is a bounded
+control loop:
 
-## The Capture Method
+```text
+recognizable trigger -> orient -> decide -> act -> verify -> close
+                              \-> adapt, recover, or escalate
+```
 
-### 1. Bound the material
+The Playbook keeps the context that changes action: cues, decisions, sequencing, exceptions,
+coordination, authority, escalation, and independent verification. It can refer to tools, but it
+is not reduced to a command or script.
 
-For direct direction, the design brief is your request and any material you
-explicitly place in scope. Capture may inspect only the Trellis-managed support
-needed to find an equivalent, conflict, or path collision. For reflective
-discovery, Capture uses the current conversation by default or only the exact
-prior conversations you name. When you name prior conversations, the current
-conversation is not evidence unless you include it. Capture does not search
-ambient history, inspect adjacent chats, or treat an old approval as present
-permission to act.
+A strong Playbook can answer:
 
-This makes it clear where each part of the proposal came from: your stated
-design, selected operational evidence, or a clearly labeled inference.
+- When should a future agent use this?
+- What result does it promise, and what counts as done?
+- What inputs, context, and authority does it assume?
+- Which cues change the next decision or action?
+- When should the agent stop, adapt, recover, or escalate?
+- Which evidence shows that the result is correct?
+- What change should trigger maintenance review?
 
-### 2. Reconstruct a real example—or specify the intended method
+## Capture: explicit design
 
-When discovering from completed work, Capture first separates distinct pieces
-of work. It reconstructs the trigger, starting state, intended result,
-constraints, decisions, actions, verification, exceptions, and provenance
-before trying to generalize.
+Capture starts from owner direction. The user can provide a rough intent, a structured outline,
+or a nearly finished Playbook specification. Capture treats that request as the design brief and
+does not require a completed prior example or conversation ID.
 
-When you provide the method directly, Capture does not invent a work history.
-It maps your description to those same operational questions and labels what
-has not yet been validated.
+Capture maps the request to the Playbook questions above. It asks only for missing choices that
+would materially change the Playbook's boundary, safety, path, supporting tools, or verification.
+It does not interrogate the user merely to make an unimportant artifact look complete.
 
-This reflects ideas from
-[cognitive task analysis](https://digital.ahrq.gov/health-it-tools-and-resources/evaluation-resources/workflow-assessment-health-it-toolkit/all-workflow-tools/cognitive-task-analysis),
-which studies reasoning and information processing that ordinary task
-descriptions can miss, and the
-[Critical Decision Method](https://digital.ahrq.gov/health-it-tools-and-resources/evaluation-resources/workflow-assessment-health-it-toolkit/all-workflow-tools/critical-decision-method),
-which examines a concrete incident through its timeline, decision points, cues,
-and alternatives. The
-[MITRE Cognitive Engineering Toolkit](https://www.mitre.org/news-insights/publication/cognitive-engineering-toolkit)
-also informed the focus on anomalies, expert strategies, novice traps, and
-conditions where normal procedures fail.
+Direct direction establishes what the owner wants. It does not by itself prove that the method
+works across varied situations. When effectiveness or transfer matters, the Playbook should state
+the evidence or leave the claim bounded rather than inventing confidence.
 
-Capture is not performing a formal cognitive task analysis or Critical
-Decision Method interview. A conversation is partial evidence, memory can be
-incomplete, and a user may reasonably choose not to answer follow-up questions.
-The practical lesson for Trellis is to expose uncertainty instead of filling it
-with plausible fiction.
+Before writing, Capture checks the selected Playbooks folder for:
 
-### 3. Look at the turning points, not only the polished ending
+- an equivalent Playbook that should be updated rather than duplicated;
+- a path or identifier collision;
+- a broader or narrower Playbook whose boundary would become confusing;
+- a referenced tool or script with incompatible effects; and
+- owner content that must be preserved.
 
-For reflective discovery, Capture pays particular attention to:
+A direct `/capture-playbook ...` request authorizes the described Playbook change after material ambiguity
+is resolved and the Markdown file plan is disclosed. Supporting code, dependencies, destructive
+behavior, or external effects require a separate clear user decision.
+
+## Discover: selected-session reflection
+
+Discover uses the current session by default or exact session IDs the user selects and the host
+can retrieve. It never enumerates ambient history, searches adjacent conversations, guesses IDs,
+or treats a past approval as current authority.
+
+When the user selects more than one session, Discover reconstructs each independently before
+comparing them. One session does not fill gaps in another. Current clarification can shape a
+recommendation but is not retroactive evidence of what happened before.
+
+### Reconstruct the work
+
+Discover separates distinct completed work instances by trigger and outcome. One session can
+contain several instances, and an unfinished branch is not a demonstrated method.
+
+For each instance, Discover reconstructs:
+
+- **Trigger and starting state:** what made the work necessary and what was true at the start;
+- **Outcome:** what result was sought and what counted as done;
+- **Constraints and authority:** scope, permissions, risks, owner choices, and fixed formats;
+- **Decisions and cues:** where alternatives existed and what changed the path;
+- **Activities and artifacts:** what happened and in what dependency order;
+- **Verification:** what evidence showed that the result worked;
+- **Exceptions and recovery:** failures, retries, rejected defaults, handoffs, and stop rules; and
+- **Provenance:** which claims came from the user, observed work, a selected artifact, or inference.
+
+This approach is informed by cognitive task analysis, the Critical Decision Method,
+after-action review, and research on outcome bias. Trellis does not claim to conduct a formal
+interview or quality-management assessment. The practical lesson is to expose uncertainty rather
+than fill it with plausible fiction.
+
+### Look for turning points
+
+Strong candidates often preserve:
 
 - a correction or rejected default;
-- a hidden constraint that changed the path;
-- a failed attempt and the reason it failed;
-- a cue that distinguished two plausible choices;
-- an exception, handoff, fallback, or escalation;
-- a verification step that caught a believable error; and
-- stable mechanics that repeated without needing judgment.
+- a hidden constraint that changed the plan;
+- a failed attempt and why it failed;
+- a cue that distinguished plausible choices;
+- a verification step that caught a believable error;
+- an exception, fallback, escalation, or handoff; or
+- stable mechanics that repeated while judgment remained contextual.
 
-The U.S. Army's discussion of
-[after-action review](https://www.armyupress.army.mil/Journals/Journal-of-Military-Learning/Journal-of-Military-Learning-Archives/April-2022/Cates-Action-Review/)
-informed the comparison between what was intended, what occurred, why it
-occurred, and what should change next time. Research on
-[outcome bias](https://doi.org/10.1037/0022-3514.54.4.569) is a reminder that a
-good result does not, by itself, prove that the decision process was good.
+A good result does not prove that the method was good. Discover examines the decisions,
+boundaries, and verification that produced the outcome.
 
-### 4. Turn the candidate into a future-use proposition
+### Apply the candidate gates
 
-Capture normalizes a candidate into one sentence:
+A recommendation must be:
 
-> When **this recognizable situation** occurs, use **this method** to produce
-> **this result**, within **these boundaries**, and verify it with **this
-> evidence**.
-
-This forces the important questions into view: when the method applies, when it
-does not, what can vary, what authority it assumes, and how someone will know
-the work is actually finished.
-
-The
-[ISO process approach](https://www.iso.org/files/live/sites/isoorg/files/archive/pdf/en/iso9001-2015-process-appr.pdf)
-informed the input–activity–output–check shape and the idea that controls should
-reflect context and risk. Trellis does not claim ISO conformity or turn ordinary
-knowledge work into a quality-management system.
-
-### 5. Apply the candidate gates
-
-A candidate must be:
-
-- **Grounded:** traceable to direct owner direction, selected work, or both;
+- **Grounded:** traceable to selected work or explicit clarification, with inference labeled;
 - **Significant:** worth saving and maintaining;
-- **Repeatable:** entered by a recognizable future trigger;
+- **Repeatable:** entered by a recognizable future situation;
 - **Applicable:** clear about use, non-use, and variable details;
-- **Valid:** faithful to the request or evidence, without unsupported claims;
-- **Bounded:** one coherent trigger and outcome; an Action also has one effect,
-  approval, success, and recovery boundary;
-- **Usable:** followable without hidden conversation context;
-- **Distinct:** not already covered by an existing Playbook, Action, or obvious
-  local command;
-- **Maintainable:** likely to repay its upkeep; and
-- **Safe to retain:** free of secrets and private details that do not belong in
-  a reusable guide or tool.
+- **Valid:** faithful to the selected evidence rather than generic advice or hindsight;
+- **Bounded:** one trigger class and one outcome class;
+- **Usable:** followable without the original conversation;
+- **Distinct:** not already owned by an equivalent Playbook; and
+- **Safe to retain:** free of secrets, unnecessary personal data, and private residue.
 
-The significance, validity, and applicability checks were informed by the
-[GAO review of NASA's lessons-learned systems](https://www.gao.gov/products/gao-02-195),
-which also illustrates why storing lessons does not ensure that people can find
-or apply them. The
-[National Academies' review of learning and transfer](https://www.nationalacademies.org/read/9853/chapter/6)
-informed the emphasis on applicability across contexts, feedback, and the risk
-of carrying a rule into the wrong situation.
+Facts, conclusions, citations, and one-off outputs can support a Playbook but are not the reusable
+unit by themselves. Parameterize incidental names, dates, paths, IDs, and values.
 
-Passing the gates does not mean a method is universally true. It means the
-candidate is coherent enough to put in front of the user with its uncertainty
-visible.
+Finding no strong recommendation is a valid result.
 
-### 6. Keep confidence honest
+### Return Capture prompts, not files
 
-Capture separates three questions:
+Discover does not create, update, or save a Playbook. It returns a self-contained command such as:
 
-- **Method confidence:** Has the way of working transferred beyond its current
-  specification or examples?
-- **Implementation readiness:** Has this exact Action code been tested?
-- **Lifecycle:** Has the owner approved it for active use?
+```text
+/capture-playbook Create a Playbook named "Verify release package parity". Use it when source and generated
+packages must agree before release. The Playbook should ...
+```
 
-A direct design without evidence from genuinely different real uses, one
-completed real-world example, or repeated near-identical cases stays
-**Provisional**.
-Evidence from genuinely different uses—not copies of the same case—or the
-owner's explicit statement that the practice is already established across
-them can support **Established** confidence. Capture records that basis without
-inventing supporting details. High-consequence work needs representative variation
-and important failure boundaries before Established confidence.
+A useful recommendation includes enough detail for Capture to work without the original session:
 
-This distinction keeps polished prose from masquerading as performance
-evidence and keeps a recurring method from masquerading as tested code.
+- proposed title or outcome;
+- future trigger and non-use boundary;
+- desired outcome and verification;
+- important cues, decisions, exceptions, and escalation;
+- variables Capture should parameterize;
+- evidence limits or contradictions;
+- whether an existing Playbook should be updated; and
+- a supporting-tool suggestion only when it materially improves the method.
 
-### 7. Find the smallest coherent shape
+The user can edit, combine, ignore, or run each recommendation manually. Discover never invokes
+Capture on the user's behalf.
 
-Capture tests whether a candidate has one trigger family, one recognizable
-outcome, and one coherent approval, effect, verification, recovery, and change
-boundary. It splits independent jobs and keeps branches together only when
-separation would make the promised result incomplete or unsafe.
+## Playbook sizing
 
-The
-[FAA/NASA study of flight-deck checklists](https://www.faa.gov/sites/faa.gov/files/2022-11/NASA%20Ames%20Rpt%20CR%20177549%20.pdf)
-informed the preference for minimum useful cues, coherent phases, interruption
-handling, and keeping background explanation outside the point-of-work path.
-A Trellis Playbook is broader than a checklist, so judgment and rationale stay
-where they change the decision.
+Split a proposed Playbook when parts have independent triggers, outcomes, callers, authority,
+verification, recovery, stewardship, or change cadence. Keep branches together when they begin in
+the same recognizable situation and reconverge on the same outcome.
 
-### 8. Choose Playbook, Action, both, or nothing
+Mere sequence, convenience, a shared batch, or one artifact passing to another is not enough to
+combine independent work. Conversely, do not split a method so finely that each part loses the
+judgment or verification required to be useful.
 
-- A **Playbook** keeps contextual judgment: cues, decisions, sequencing,
-  exceptions, coordination, and escalation.
-- An **Action** performs one mechanically specified job over explicitly scoped
-  local files, with observable effects, failure behavior, recovery, and tests.
-- A **Playbook and Action** remain separate when a judgment-led workflow uses a
-  reusable mechanical operation.
-- **Nothing** is the right result for a fact, one-off answer, generic advice,
-  unsafe residue, weak idea, duplicate, or candidate not worth maintaining.
+A title containing “and” is a prompt to test the boundary, not an automatic failure.
 
-The separation between judgment and mechanics is a Trellis design choice. The
-model from
-[Parasuraman, Sheridan, and Wickens](https://pubmed.ncbi.nlm.nih.gov/11760769/)
-is consistent with that stance: it treats information acquisition, analysis,
-decision selection, and action implementation as separately allocatable
-functions. Guidance such as the
-[GSA RPA Playbook](https://www.gsa.gov/cdnstatic/rpa-playbook.pdf) and Google's
-[Eliminating Toil](https://sre.google/workbook/eliminating-toil/) also informed
-the preference for mature, rules-based candidates with defined triggers,
-inputs, outputs, safeguards, observability, and a safe return to human judgment.
+## Supporting tools
 
-Those sources do not prescribe Trellis's local-file-only Action boundary. That
-is a deliberate Trellis safety and product choice.
+A Playbook can rely on three kinds of support:
 
-### 9. Put the user at a real decision point
+1. **Host-native capabilities.** Prefer tools already available to the person or agent when their
+   authority and review boundary are clear.
+2. **Internal Trellis tools.** A small deterministic local operation can live under the selected
+   Playbooks folder in `_cli/`. A declaration selects one fixed built-in operation: file hashing,
+   byte comparison, one exact text replacement, or setting one existing JSON value. Internal tools
+   support a Playbook and are not separately indexed. The shared runtime uses explicit local
+   paths, bounded JSON output, no external dependencies, and a reviewed file hash before applying
+   a write. It contains no generated tool source and has no network, shell, child-process,
+   environment-secret, file-creation, deletion, permission, publication, communication, remote,
+   or consequential-judgment authority.
+3. **Project-owned scripts.** A user can explicitly ask an agent to create a script beside a
+   Playbook when broader capabilities are appropriate. The Playbook documents the interpreter,
+   dependencies, authority, effects, invocation, verification, and recovery. The script remains
+   project scaffolding rather than inheriting the internal-tool safety profile.
 
-Capture first shows a compact card, then the full artifact and exact file
-effects for candidates the user chooses to review. Save, edit, skip, dependency
-installation, testing, running, and activation remain separate decisions.
+The conservative internal-tool profile governs automation Trellis creates by default. It is not a
+policy that prevents project owners from using other code or organization.
 
-The
-[NIST AI RMF 1.0 Appendix C (2023)](https://airc.nist.gov/airmf-resources/airmf/appendices/app-c-ai-risk-management-and-human-ai-interaction/)
-informed the emphasis on explicit roles, decision authority, system limits, and
-the risk of losing context. Trellis's practical interpretation is that approval
-is meaningful only when the user can inspect the proposal, reject it, and see
-what will happen.
+## Audit: advisory maintenance
 
-## What Trellis Synthesized
+Audit reviews the selected Playbooks folder, marked Playbooks, referenced internal tools, and
+explicitly scoped project-owned scripts. It checks structure, followability, boundaries,
+verification, overlap, fragmentation, and concrete maintenance evidence.
 
-The cited work informed Trellis; it did not specify or validate Trellis. The
-following are product-design choices that should continue to be tested with
-real use:
+Audit remains local, static, read-only, and advisory. It does not execute or change anything,
+does not invent missing Playbooks from unrelated project content, and does not reject owner
+scaffolding merely because Trellis did not create it.
 
-- the direct, reflective, and hybrid input routes;
-- the trigger-to-verified-outcome reconstruction model;
-- the candidate gates and two-state method confidence;
-- the Playbook and Action taxonomy;
-- rules for keeping each artifact focused on one coherent job;
-- the local-file-only Action safety envelope; and
-- the card, proposal, save, test, run, and lifecycle approval sequence.
+## Human control
 
-The methodology is meant to make Trellis inspectable, not to borrow authority
-from research conducted for other domains. Reviewer cases, forward tests, user
-feedback, and audits of real collections are still necessary to learn where
-the model helps, where it creates friction, and what should change.
+The four skills have deliberately different authority:
 
-## The Short Version
+- Init can create the agreed collection README after showing its small file plan.
+- Capture can write the exact requested Playbook and separately approved support.
+- Discover is recommendation-only.
+- Audit is read-only and advisory.
 
-Tell Trellis what you want, ask it to look at selected work, or do both. It
-turns the material into a bounded future-use proposition, keeps evidence and
-intent separate, chooses the smallest fitting form, and shows you the proposal
-before anything is saved.
+None of the skills silently edits `AGENTS.md`, stages version-control changes, publishes content,
+runs newly created code, installs dependencies, or communicates externally. Those decisions
+remain separate and follow the host's authority model.
+
+## What Trellis is testing
+
+The research behind Trellis informed its emphasis on cues, decision points, applicability,
+verification, interruption, recovery, and explicit human authority. The following remain product
+choices to test in real use:
+
+- Playbooks as the only user-facing reusable artifact;
+- one trigger-to-verified-outcome boundary;
+- Capture as explicit creation and Discover as optional reflection;
+- selected sessions only, with no ambient-history mining;
+- self-contained `/capture-playbook ...` recommendations;
+- declarative internal tools under the Playbooks folder;
+- a fixed-operation conservative default for Trellis-created tools; and
+- project freedom to add standalone scripts and custom scaffolding.
+
+The project Atlas records current decisions and field observations so these choices can change
+when evidence shows a better design.

@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-plugin-manifest.json",
+  "name": "trellis",
+  "displayName": "Trellis",
+  "version": "0.5.0",
+  "description": "Build project Playbooks agents can use to reliably repeat work.",
+  "author": {
+    "name": "Vamsi Alluri",
+    "email": "info@neutral.dev"
+  },
+  "homepage": "https://github.com/neutral/trellis",
+  "repository": "https://github.com/neutral/trellis",
+  "license": "CC0-1.0",
+  "keywords": [
+    "agent-skills",
+    "playbooks",
+    "knowledge-work",
+    "workflows",
+    "documentation"
+  ]
+}

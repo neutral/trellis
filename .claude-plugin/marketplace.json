@@ -1,0 +1,17 @@
+{
+  "name": "trellis",
+  "owner": {
+    "name": "Vamsi Alluri",
+    "email": "info@neutral.dev",
+    "url": "https://github.com/neutral"
+  },
+  "description": "Install Trellis as one managed plugin containing four Playbook skills.",
+  "plugins": [
+    {
+      "name": "trellis",
+      "source": "./",
+      "description": "Build project Playbooks agents can use to reliably repeat work.",
+      "category": "productivity"
+    }
+  ]
+}

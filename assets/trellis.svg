@@ -1,0 +1,110 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 440" role="img" aria-label="Watercolor painting of a young green vine climbing an iron fan trellis: it covers the left and center spokes and reaches a tendril toward the bare right spoke, above a warm splash of earth">
+  <defs>
+    <path id="leaf" d="M 0 0 C 9 -8 22 -7 26 1 C 21 9 8 11 0 0 Z"/>
+    <filter id="wash" x="-40%" y="-40%" width="180%" height="180%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.018 0.032" numOctaves="3" seed="11" result="n"/>
+      <feDisplacementMap in="SourceGraphic" in2="n" scale="14"/>
+      <feGaussianBlur stdDeviation="0.5"/>
+    </filter>
+    <filter id="wash2" x="-40%" y="-40%" width="180%" height="180%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.024 0.02" numOctaves="3" seed="4" result="n"/>
+      <feDisplacementMap in="SourceGraphic" in2="n" scale="18"/>
+      <feGaussianBlur stdDeviation="0.7"/>
+    </filter>
+    <filter id="leafwash" x="-60%" y="-60%" width="220%" height="220%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.06 0.05" numOctaves="2" seed="7" result="n"/>
+      <feDisplacementMap in="SourceGraphic" in2="n" scale="4"/>
+      <feGaussianBlur stdDeviation="0.3"/>
+    </filter>
+    <filter id="soft" x="-60%" y="-60%" width="220%" height="220%">
+      <feGaussianBlur stdDeviation="16"/>
+    </filter>
+  </defs>
+
+  <rect x="1.5" y="1.5" width="877" height="437" rx="18" fill="#FBF9F2" stroke="#E7E2D2" stroke-width="1.5"/>
+
+  <ellipse cx="430" cy="240" rx="175" ry="150" fill="#A9C295" opacity="0.14" filter="url(#soft)"/>
+
+  <path d="M 208 370 C 258 352 345 346 442 352 C 556 358 636 350 682 364 C 698 371 662 384 602 389 C 500 397 332 397 258 388 C 220 383 196 377 208 370 Z" fill="#B08A4F" opacity="0.34" filter="url(#wash2)"/>
+  <path d="M 262 366 C 330 352 432 349 520 355 C 598 361 638 361 654 369 C 640 381 562 388 462 389 C 372 390 292 383 264 375 Z" fill="#7A8A4E" opacity="0.30" filter="url(#wash)"/>
+  <path d="M 320 362 C 380 354 470 353 540 358 C 580 361 600 364 606 368 C 590 375 520 379 450 379 C 390 379 340 374 324 369 Z" fill="#C79A55" opacity="0.26" filter="url(#wash)"/>
+  <!-- iron fan trellis: three spokes, two tie-wires, arched top with curls -->
+  <g stroke="#4C4E4D" stroke-linecap="round" fill="none" opacity="0.92">
+    <path d="M 380 380 L 396 142" stroke-width="3.4"/>
+    <path d="M 500 380 L 484 142" stroke-width="3.4"/>
+    <path d="M 440 382 L 440 111" stroke-width="3.8"/>
+    <path d="M 396 142 Q 440 80 484 142" stroke-width="3.4"/>
+    <path d="M 385 303 Q 440 297 495 303" stroke-width="2.2"/>
+    <path d="M 391 223 Q 440 217 489 223" stroke-width="2.2"/>
+    <path d="M 396 142 C 390 151 381 153 377 146 C 374 140 380 135 385 139" stroke-width="2.4"/>
+    <path d="M 484 142 C 490 151 499 153 503 146 C 506 140 500 135 495 139" stroke-width="2.4"/>
+  </g>
+
+  <!-- grass tufts at the vine's root -->
+  <g stroke="#5B8A3C" stroke-width="1.6" stroke-linecap="round" fill="none" opacity="0.7">
+    <path d="M 392 379 C 395 372 394 366 390 361"/>
+    <path d="M 381 380 C 378 373 379 368 383 363"/>
+    <path d="M 401 380 C 405 375 406 370 404 365"/>
+  </g>
+
+  <!-- vine: up the left spoke, across the lower tie, up the center spoke,
+       leading shoot along the upper tie toward the right spoke -->
+  <path d="M 386 380
+           C 396 356 376 342 384 322
+           C 390 308 384 305 390 300
+           C 404 292 420 306 432 298
+           C 444 290 434 272 441 256
+           C 447 242 436 236 440 224
+           C 443 216 452 222 462 219"
+        fill="none" stroke="#4E7D3A" stroke-width="2.6" stroke-linecap="round" opacity="0.85"/>
+  <path d="M 462 219 C 468 217 471 212 468 208" fill="none" stroke="#5B8A3C" stroke-width="2" stroke-linecap="round" opacity="0.85"/>
+  <path d="M 440 224 C 437 214 443 206 439 196" fill="none" stroke="#4E7D3A" stroke-width="2.2" stroke-linecap="round" opacity="0.85"/>
+
+  <!-- iron overdraw where the vine passes behind -->
+  <g stroke="#4C4E4D" stroke-linecap="round" opacity="0.92" fill="none">
+    <path d="M 382 352 L 384 336" stroke-width="3.4"/>
+    <path d="M 406 300 Q 414 299 421 299" stroke-width="2.2"/>
+    <path d="M 440 266 L 440 250" stroke-width="3.8"/>
+    <path d="M 447 220 Q 452 219 457 219" stroke-width="2.2"/>
+  </g>
+
+  <!-- tendrils -->
+  <g stroke="#57883F" stroke-width="1.4" stroke-linecap="round" fill="none" opacity="0.8">
+    <path d="M 388 324 C 378 320 375 312 382 308 C 387 305 391 310 387 314"/>
+    <path d="M 438 254 C 450 250 454 242 448 237 C 443 233 438 238 442 242"/>
+    <path d="M 468 208 C 478 203 484 205 487 212" stroke-width="1.8"/>
+  </g>
+
+  <!-- leaves: fuller along the left and center spokes, young at the leading tip -->
+  <g filter="url(#leafwash)">
+    <use href="#leaf" transform="translate(394 362) rotate(-20) scale(1.15)" fill="#7FAE5F" opacity="0.72"/>
+    <use href="#leaf" transform="translate(395 362) rotate(-20) scale(0.72)" fill="#4B8A33" opacity="0.68"/>
+    <use href="#leaf" transform="translate(372 344) rotate(205) scale(1.0)" fill="#6FA050" opacity="0.70"/>
+    <use href="#leaf" transform="translate(371 344) rotate(205) scale(0.62)" fill="#35682A" opacity="0.62"/>
+    <use href="#leaf" transform="translate(396 326) rotate(-35) scale(1.05)" fill="#7FAE5F" opacity="0.72"/>
+    <use href="#leaf" transform="translate(397 326) rotate(-35) scale(0.66)" fill="#4B8A33" opacity="0.66"/>
+    <use href="#leaf" transform="translate(376 310) rotate(195) scale(0.9)" fill="#6FA050" opacity="0.68"/>
+    <use href="#leaf" transform="translate(375 310) rotate(195) scale(0.56)" fill="#35682A" opacity="0.62"/>
+    <use href="#leaf" transform="translate(400 294) rotate(-60) scale(0.9)" fill="#7FAE5F" opacity="0.70"/>
+    <use href="#leaf" transform="translate(401 294) rotate(-60) scale(0.56)" fill="#4B8A33" opacity="0.65"/>
+    <use href="#leaf" transform="translate(418 308) rotate(150) scale(0.85)" fill="#6FA050" opacity="0.66"/>
+    <use href="#leaf" transform="translate(417 308) rotate(150) scale(0.52)" fill="#35682A" opacity="0.60"/>
+    <use href="#leaf" transform="translate(436 290) rotate(-15) scale(1.0)" fill="#7FAE5F" opacity="0.72"/>
+    <use href="#leaf" transform="translate(437 290) rotate(-15) scale(0.62)" fill="#4B8A33" opacity="0.66"/>
+    <use href="#leaf" transform="translate(426 266) rotate(200) scale(0.9)" fill="#6FA050" opacity="0.68"/>
+    <use href="#leaf" transform="translate(425 266) rotate(200) scale(0.56)" fill="#35682A" opacity="0.62"/>
+    <use href="#leaf" transform="translate(450 258) rotate(-30) scale(0.95)" fill="#7FAE5F" opacity="0.70"/>
+    <use href="#leaf" transform="translate(451 258) rotate(-30) scale(0.60)" fill="#4B8A33" opacity="0.65"/>
+    <use href="#leaf" transform="translate(432 240) rotate(210) scale(0.75)" fill="#6FA050" opacity="0.66"/>
+    <use href="#leaf" transform="translate(431 240) rotate(210) scale(0.46)" fill="#35682A" opacity="0.60"/>
+    <use href="#leaf" transform="translate(447 228) rotate(-45) scale(0.7)" fill="#7FAE5F" opacity="0.68"/>
+    <use href="#leaf" transform="translate(448 228) rotate(-45) scale(0.44)" fill="#4B8A33" opacity="0.64"/>
+    <use href="#leaf" transform="translate(444 208) rotate(-40) scale(0.62)" fill="#7FAE5F" opacity="0.70"/>
+    <use href="#leaf" transform="translate(445 208) rotate(-40) scale(0.40)" fill="#4B8A33" opacity="0.68"/>
+    <use href="#leaf" transform="translate(436 198) rotate(215) scale(0.55)" fill="#6FA050" opacity="0.68"/>
+    <use href="#leaf" transform="translate(435 198) rotate(215) scale(0.35)" fill="#35682A" opacity="0.64"/>
+    <use href="#leaf" transform="translate(458 213) rotate(-10) scale(0.55)" fill="#8CB768" opacity="0.70"/>
+    <use href="#leaf" transform="translate(466 208) rotate(-70) scale(0.45)" fill="#8CB768" opacity="0.68"/>
+    <use href="#leaf" transform="translate(464 209) rotate(250) scale(0.38)" fill="#5B8A3C" opacity="0.62"/>
+  </g>
+</svg>
