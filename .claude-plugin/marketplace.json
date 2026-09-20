@@ -5,12 +5,12 @@
     "email": "info@neutral.dev",
     "url": "https://github.com/neutral"
   },
-  "description": "Install Trellis as one managed plugin containing four Playbook skills.",
+  "description": "Install Trellis with Shape Handbook and Learn From Work.",
   "plugins": [
     {
       "name": "trellis",
       "source": "./",
-      "description": "Build project Playbooks agents can use to reliably repeat work.",
+      "description": "Keep the guidance agents need close to the work they do.",
       "category": "productivity"
     }
   ]

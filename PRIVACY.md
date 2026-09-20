@@ -1,42 +1,26 @@
-# Trellis Privacy
+# Trellis privacy
 
-Trellis is a local Agent Skills package. It has no hosted backend, account system, analytics,
-telemetry, or required network service.
+Trellis is a local Agent Skills package. It has no hosted backend, account system,
+analytics, telemetry, or required network service. Agent hosts have their own
+model processing, storage, logging, and permission behavior; their policies govern
+those services.
 
-## Session use
+Skills inspect the selected area and relevant sources for the requested handbook
+work. Learn From Work uses the current conversation, exact selected sessions, or
+explicitly supplied accounts of work and artifacts. It does not enumerate unselected
+history. References to other files, services, or conversations do not authorize access.
 
-- Capture works from the user's explicit Playbook request and the project files needed to place
-  or update that Playbook.
-- Discover uses the current session by default or exact session IDs the user selects and the host
-  can retrieve.
-- Trellis does not enumerate, search, sample, or mine ambient conversation history.
-- A selected session does not authorize access to files, services, or credentials mentioned in
-  that session.
-- Trellis does not persist session transcripts or session IDs in Playbooks.
+Trellis skills write only within selected handbooks. Review-only Shaping and Learn
+From Work write nothing. The skills do not send messages, publish handbook content,
+or upload project material. They do not persist conversation transcripts or session identifiers.
 
-## Project files
+Reusable content must omit secrets, credentials, unnecessary personal data, and
+confidential details left over from the source work. Preserve a method with
+generalized examples or exact links to appropriately accessible sources. Do not copy sensitive source content merely
+to make a handbook self-contained.
 
-Init, Capture, and Audit inspect only the project-local scope needed for the requested operation.
-Trellis-managed content consists of the selected Playbooks-root marker and index, marked
-`PLAYBOOK.md` files, and internal `_cli` files that Trellis created. Other files remain owner
-content.
-
-Trellis does not send project files or session material to third parties. A host may provide its
-own model, storage, logging, or connector behavior; review that host's privacy terms separately.
-
-## Sensitive material
-
-Do not put secrets, credentials, private keys, access tokens, unnecessary personal data, or
-confidential customer content in reusable Playbooks or supporting tools. Generalize or omit
-sensitive residue when a reusable method can be preserved without it.
-
-Trellis-created internal tools select fixed local-file operations and contain no generated
-executable source. The shared runtime has no environment-secret, network, shell, child-process,
-creation, deletion, permission, publication, or remote authority. An explicitly requested
-standalone script can have a broader owner-approved design, but that design is outside the
-internal-tool profile.
-
-## No automatic publication
-
-Trellis does not stage, commit, push, publish, send messages, or expose a Playbooks collection.
-A Playbook or path reference does not grant authority for those actions.
+Optional Playbook scripts are local workspace helpers. Their documented inputs,
+outputs, and effects must stay within the workspace and narrower task scope.
+Review generated code and enforce its scope through the execution host. The
+[contract](CONTRACT.md) describes the distinction between authoring a script and
+running it during work.

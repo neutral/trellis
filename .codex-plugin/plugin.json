@@ -1,7 +1,7 @@
 {
   "name": "trellis",
-  "version": "0.5.0",
-  "description": "Build project Playbooks agents can use to reliably repeat work.",
+  "version": "0.6.1",
+  "description": "Keep the guidance agents need close to the work they do.",
   "author": {
     "name": "Vamsi Alluri",
     "email": "info@neutral.dev"
@@ -11,16 +11,17 @@
   "license": "CC0-1.0",
   "keywords": [
     "agent-skills",
-    "playbooks",
     "knowledge-work",
-    "workflows",
-    "documentation"
+    "handbooks",
+    "practices",
+    "checks",
+    "playbooks"
   ],
   "skills": "./skills/",
   "interface": {
     "displayName": "Trellis",
-    "shortDescription": "Build repeatable project Playbooks",
-    "longDescription": "Trellis helps people turn work they have done before into project-local Playbooks agents can follow again. /trellis-init sets up the collection, /capture-playbook creates the exact Playbook a user describes, /discover-playbooks recommends Playbooks from only the sessions the user selects, and /trellis-audit reviews the collection without changing or executing it. Playbooks remain the only user-facing artifact; supporting tools stay private to a Playbook or project-owned.",
+    "shortDescription": "Give agents clear standards for doing and reviewing work.",
+    "longDescription": "Trellis preserves working methods in handbooks beside the work. Shape Handbook clarifies consequential owner decisions, creates or improves the requested guidance, and reviews its coherence and usability. Handbook READMEs explain use without Trellis installed. Learn From Work asks about missing context when it would change a lesson, then proposes improvements from selected experience. Review-only Shaping and Learning write nothing; Shaping writes only inside selected handbooks. People and agents carry out the work under their task permissions.",
     "developerName": "Vamsi Alluri",
     "category": "Productivity",
     "capabilities": [
@@ -31,9 +32,9 @@
     "privacyPolicyURL": "https://github.com/neutral/trellis/blob/main/PRIVACY.md",
     "termsOfServiceURL": "https://github.com/neutral/trellis/blob/main/TERMS.md",
     "defaultPrompt": [
-      "/capture-playbook Create a release-review Playbook with stop rules and evidence-backed verification.",
-      "/discover-playbooks Find reusable methods in this conversation and return capture prompts without writing files.",
-      "/trellis-audit Review this project's Playbooks for unclear triggers, overlap, and weak verification without changing files."
+      "Shape a handbook for this area.",
+      "Review this handbook for coherence and useful working guidance.",
+      "Learn from this work and recommend useful handbook improvements."
     ],
     "brandColor": "#4E7D3A",
     "composerIcon": "./assets/trellis-icon.svg",

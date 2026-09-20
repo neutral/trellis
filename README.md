@@ -1,147 +1,175 @@
 # Trellis
 
-Trellis helps you build Playbooks your agents can use to reliably repeat work you have done
-before.
+**Keep the guidance agents need close to the work they do.**
 
-Each Playbook is a project-local guide to one real task. It gives an agent the trigger, outcome,
-method, judgment calls, boundaries, and verification needed to do the work again without relying
-on the original chat or one person's memory.
+Trellis maintains handbook areas in your workspace folder. A handbook helps the
+next contributor or agent find the methods a task depends on, understand what to
+check, and judge what the evidence supports. As work exposes recurring problems,
+you can refine that guidance for future tasks.
 
-## Commands
+To support this, Trellis's skills help you create and maintain the following in a
+handbook:
 
-- **`/trellis-init`** creates or adopts `playbooks/` or another project-local folder you choose.
-- **`/capture-playbook`** creates or revises the exact Playbook you describe.
-- **`/discover-playbooks`** examines only sessions you select and returns ready-to-edit
-  `/capture-playbook ...` recommendations without writing anything.
-- **`/trellis-audit`** reviews Playbooks and recommends improvements without executing or changing
-  them.
+- **Repeatable Playbooks:** instructions for recurring tasks, including when to
+  use them, the decisions involved, and how to check the result.
+- **Checks:** expectations to assess whenever they apply, with guidance on how to
+  verify them.
+- **Practices:** guidance for approaching work and making recurring decisions
+  consistently.
+- **Templates:** reusable structures and prompts that help contributors and
+  agents produce complete, useful work.
 
-Playbooks are the only user-facing Trellis artifact. Internal tools can live under the selected
-Playbooks folder in `_cli/` when a Playbook needs a small fixed local-file operation. A project can
-also explicitly ask an agent for a standalone script beside a Playbook when a broader design is
-appropriate.
+Together, these guide how work is approached, carried out, and reviewed in the
+workspace.
+
+Trellis provides two skills:
+
+| Skill | Use it to |
+| --- | --- |
+| [Shape Handbook](skills/shape-handbook/SKILL.md) (`shape-handbook`) | Set up, adopt, review, or refine a handbook, keeping its contents consistent. |
+| [Learn From Work](skills/learn-from-work/SKILL.md) (`learn-from-work`) | Examine selected experience and propose useful handbook improvements for you to choose. |
 
 ## Install
 
-Trellis bundles its four Agent Skills as one plugin so they install and update together. Use your
-host's native plugin flow when available, then start a new agent session.
+Use your host's plugin flow to install both skills together, or install the
+standalone skills. Installation uses the host or installer; Trellis's text
+instructions need no service, account, or runtime of their own.
 
-### Native plugin installation (recommended)
+### ChatGPT and Codex
 
-#### ChatGPT
+Open [Trellis in the OpenAI Plugin Directory](https://chatgpt.com/plugins/plugins_6a630817fcdc8191a6e0114bbd61bc33)
+and choose **Install plugin**. After installation, start a new chat or agent
+session and ask ChatGPT or Codex to use Trellis. See the official
+[plugin installation guide](https://learn.chatgpt.com/docs/plugins#install-and-use-a-plugin).
 
-Trellis 0.5.0 is available in the [ChatGPT Plugins
-Directory](https://chatgpt.com/plugins/plugins_6a630817fcdc8191a6e0114bbd61bc33).
-
-To install it in ChatGPT on the web or in the desktop app, open **Plugins**, search for **Trellis**,
-open its listing, and select the **+** button. Start a new chat after installation; type `@Trellis`
-whenever you want to choose the plugin or one of its skills explicitly. See the
-[official ChatGPT plugin instructions](https://learn.chatgpt.com/docs/plugins#install-and-use-a-plugin)
-for the full flow.
-
-#### Codex
-
-Add the Trellis marketplace and install the plugin with the [Codex
-CLI](https://developers.openai.com/plugins/build/plugins):
+To install from GitHub using the Codex CLI, add this repository's marketplace
+and install Trellis from a terminal:
 
 ```sh
 codex plugin marketplace add neutral/trellis
 codex plugin add trellis@trellis
 ```
 
-Codex plugins work in Codex CLI and the ChatGPT desktop app. The Codex IDE extension does not
-currently support plugins.
+See the official [marketplace instructions](https://developers.openai.com/plugins/build/plugins#add-a-marketplace-from-the-cli)
+and [plugin command reference](https://learn.chatgpt.com/docs/developer-commands#codex-plugin).
+Start a new agent session after installation.
 
-#### Claude Code
+### Claude Code
 
-Run these commands inside [Claude Code](https://code.claude.com/docs/en/discover-plugins):
+Run these commands inside Claude Code:
 
 ```text
 /plugin marketplace add neutral/trellis
 /plugin install trellis@trellis
 ```
 
-Claude Code namespaces plugin skills with `trellis:`. For example, run
-`/trellis:trellis-init` to initialize a project after installing the plugin.
+Choose the installation scope when prompted, then follow the activation message
+or start a new session. Claude Code prefixes plugin skill names with `trellis:`;
+for example, use `/trellis:shape-handbook`. See the official
+[plugin installation guide](https://code.claude.com/docs/en/discover-plugins).
 
-#### Gemini CLI
+### Cursor
 
-Install the repository as a [Gemini CLI extension](https://geminicli.com/docs/extensions/reference/):
+For a local plugin, clone this repository into Cursor's local plugin directory:
+
+```sh
+git clone https://github.com/neutral/trellis.git ~/.cursor/plugins/local/trellis
+```
+
+Restart Cursor or run **Developer: Reload Window**, then open **Customize** to
+check that both skills are present. Local plugin imports must be allowed by your
+host settings; a marketplace installation with the same name takes precedence.
+See [Cursor's local plugin instructions](https://cursor.com/docs/plugins#test-plugins-locally).
+You can also use the standalone installation below with Cursor as the target agent.
+
+### Gemini CLI
+
+Run this in a terminal, then start a new Gemini CLI session:
 
 ```sh
 gemini extensions install https://github.com/neutral/trellis
 ```
 
-Run `gemini extensions update trellis` when you want to update an existing installation.
+Use `gemini extensions update trellis` to update an installed copy. See the
+official [extension reference](https://geminicli.com/docs/extensions/reference/).
 
-### Standalone Agent Skills
+### Standalone skills
 
-Use a standalone installer when a native plugin is unavailable or when you want the portable
-skills without the plugin wrapper.
-
-#### Vercel Skills CLI
-
-The [Vercel Skills CLI](https://skills.sh/docs/cli) runs through `npx` and prompts you to choose
-from the supported agents it detects:
+With a GitHub CLI that supports [`gh skill install`](https://cli.github.com/manual/gh_skill_install),
+you can install the current public checkout explicitly:
 
 ```sh
-npx skills add neutral/trellis --skill "*" --global
+git clone https://github.com/neutral/trellis.git
+gh skill install ./trellis --from-local --all --agent codex --scope user
 ```
 
-#### GitHub CLI
+Replace `codex` with `claude-code`, `cursor`, or `gemini-cli` for another host.
+For project installation, run the installer from the target project, use
+`--scope project`, and point it to the Trellis checkout. The local-checkout recipe
+uses the files you cloned; an unpinned remote `gh skill install` can prefer a
+tagged release over the default branch.
 
-The [`gh skill` command](https://cli.github.com/manual/gh_skill) is currently in preview. With a
-recent GitHub CLI, run the command for your agent:
+Each complete `skills/<name>/` directory can also be copied into a skill location
+supported by your host. Keep its references and assets with it. Use the host's
+skill selector or invocation syntax; prefixes vary by host.
 
-```sh
-# Codex
-gh skill install neutral/trellis --all --agent codex --scope user
+## Use a handbook
 
-# Claude Code
-gh skill install neutral/trellis --all --agent claude-code --scope user
+Choose a workspace and an existing area within it. Ask Shape Handbook to establish
+the area's `handbook/`, or refine one that already exists. For example:
 
-# Cursor
-gh skill install neutral/trellis --all --agent cursor --scope user
+> Set up a handbook for research/. Use this project folder as the workspace. Include
+> a check for clear writing and claims supported by sources.
 
-# Gemini CLI
-gh skill install neutral/trellis --all --agent gemini-cli --scope user
-```
+Setup creates the handbook README and any directories needed by the request.
+It returns an optional, path-aware `AGENTS.md` blurb for you to place manually;
+the skill never edits that file. Different areas can have their own handbooks and
+link to shared guidance.
 
-To install the standalone skills only in the current project, omit `--global` from the Vercel
-command or replace `--scope user` with `--scope project` in a GitHub command.
+The handbook README explains how to use its contents without Trellis installed.
+Future contributors follow the guidance relevant to their task, perform its
+applicable checks, and ask the owner about consequential unresolved decisions.
+If the project has no existing pointer to the handbook, adding the returned blurb
+is your remaining step to help agents discover it. Creating guidance does not by
+itself establish that it has been read or successfully used.
 
-## Initialize
+Ask for the outcome you need. You do not need to choose all the artifact types
+before asking for an improvement:
 
-Run `/trellis-init`. It proposes `playbooks/` by default, lets you choose or adopt another folder,
-and returns an optional `AGENTS.md` snippet for you to place manually.
+- “Refine the team handbook so meeting follow-ups are clear and easy to review.”
+- “Save our weekly research-summary procedure as a Playbook in the research handbook.”
+- “Review these handbooks for overlap and conflicting practices, without changing them.”
+- “Learn from this customer-support conversation and propose improvements to how we work next time.”
 
-## Create a Playbook
+The skills inspect selected material first and ask focused questions when your
+answer would change a working rule or lesson. Existing answers need no repeated
+confirmation. Shape Handbook explains the decision its changes support and what
+it verified. Learn From Work incorporates your answers into a useful conclusion
+and proposals to choose, or explains why no durable change is warranted.
 
-Give `/capture-playbook` a concrete description:
+A Playbook lives at `playbooks/<name>/playbook-<name>.md`. Checks apply independently
+of Playbooks. A handbook needs only the material that serves its work.
 
-```text
-/capture-playbook Create a Playbook for reviewing a small plugin release before tagging it. Check
-source and generated packages, stop when generated output is stale, and finish with a clear go or
-no-go decision backed by evidence.
-```
+## Scope and control
 
-## Discover candidates
+Shape Handbook writes only inside the selected handbook; review-only requests
+produce findings without file changes. Learn From Work writes nothing and never
+invokes Shape Handbook automatically. It uses the current conversation, exact
+sessions you select, or explicitly supplied accounts and artifacts.
 
-Run `/discover-playbooks` on the current session or exact prior session IDs your host can retrieve.
-It returns one or more self-contained `/capture-playbook ...` suggestions. Review or edit them,
-then run the suggestions you want yourself.
+Your request authorizes the corresponding handbook edits. Preserving or revising
+a Playbook requires an explicit request for that procedure, including a proposal
+you choose to adopt. Creating the Playbook does not carry out its work. People and
+agents apply handbook material under the authority of their ordinary tasks.
 
-## Audit
+Optional Playbook scripts operate within the declared workspace and task scope.
+Review and test their effects, and use host confinement when executing them.
+Reading a check or completing a template does not establish that its expectation
+has been met; perform the actual verification and keep evidence limits explicit.
 
-Run `/trellis-audit` and name the Playbooks folder to review. The audit is read-only and advisory.
-It respects custom owner files and project-owned scripts.
+## Documentation and license
 
-## Methodology, privacy, and terms
-
-- [Methodology](METHODOLOGY.md)
-- [Privacy](PRIVACY.md)
-- [Terms](TERMS.md)
-
-## License
-
-Trellis is dedicated to the public domain under [CC0 1.0 Universal](LICENSE).
+Read the [methodology](METHODOLOGY.md) for the reasoning and the
+[contract](CONTRACT.md) for exact product boundaries. [Privacy](PRIVACY.md) and
+[terms](TERMS.md) describe data handling and distribution. Original Trellis
+material is dedicated under [CC0 1.0 Universal](LICENSE).

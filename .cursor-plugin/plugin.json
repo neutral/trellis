@@ -1,0 +1,20 @@
+{
+  "name": "trellis",
+  "version": "0.6.1",
+  "description": "Keep the guidance agents need close to the work they do.",
+  "author": {
+    "name": "Vamsi Alluri",
+    "email": "info@neutral.dev"
+  },
+  "homepage": "https://github.com/neutral/trellis",
+  "repository": "https://github.com/neutral/trellis",
+  "license": "CC0-1.0",
+  "keywords": [
+    "agent-skills",
+    "knowledge-work",
+    "handbooks",
+    "practices",
+    "checks",
+    "playbooks"
+  ]
+}

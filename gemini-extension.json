@@ -1,5 +1,5 @@
 {
   "name": "trellis",
-  "version": "0.5.0",
-  "description": "Build project Playbooks agents can use to reliably repeat work."
+  "version": "0.6.1",
+  "description": "Keep the guidance agents need close to the work they do."
 }

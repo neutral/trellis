@@ -1,222 +1,189 @@
-# How Trellis Creates and Discovers Playbooks
+# Working methods that outlast a session
 
-Trellis separates explicit creation from reflective discovery:
+Writing, research, planning, and work with customers or teammates teach us both
+about the task at hand and about how to do similar tasks well. Drafts, notes,
+plans, and completed results record the work. A handbook keeps the methods that
+will help with the next task.
 
-- **Capture** creates the specific Playbook the user requests.
-- **Discover** studies selected work and returns one or more self-contained Capture prompts.
+For an agent entering a new task, a nearby file and a request rarely explain the
+whole working arrangement. Where is the current plan? How much detail does a
+draft need? Which source supports a conclusion? Who needs to review a change?
+What else needs checking when this changes? What would establish that the work is
+adequate? A handbook makes these recurring decisions available without
+reconstructing past conversations.
 
-The separation keeps Capture predictable, makes reflection optional, and leaves the user in
-control of which inferred method becomes maintained project guidance.
+A handbook is intended to preserve working methods across tasks. Its practical
+value depends on agents finding and applying the relevant material, and on people
+maintaining that material as the work changes. A folder of instructions alone
+establishes neither compliance nor correctness. The [contract](CONTRACT.md)
+specifies what Trellis maintains.
 
-## The reusable unit
+The handbook README explains how to use its guidance without the Trellis skills.
+That orientation helps a reader who reaches the folder; a pointer in the project's
+instructions can help them discover it. Authoring, discovery, and successful use
+are distinct achievements. Make any remaining user action concrete.
 
-A Trellis Playbook owns one recognizable situation through one verified outcome. It is a bounded
-control loop:
+## The work and its method
 
-```text
-recognizable trigger -> orient -> decide -> act -> verify -> close
-                              \-> adapt, recover, or escalate
-```
+The work is what people are trying to accomplish: an article, a research brief,
+a team plan, or a response to a customer. Its working files hold the current
+content, decisions, and results. The handbook explains how contributors approach,
+organize, and review that work. Both can set requirements: keep a rule with the
+work or method it governs.
 
-The Playbook keeps the context that changes action: cues, decisions, sequencing, exceptions,
-coordination, authority, escalation, and independent verification. It can refer to tools, but it
-is not reduced to a command or script.
+For example, a team's weekly plan records priorities, dates, and responsibilities.
+A practice can explain how to agree priorities, a check can ask whether commitments
+have an owner and a deadline, and a Playbook can describe the planning meeting.
+The agreed plan and the meeting's actual outcomes stay in the team's working files.
 
-A strong Playbook can answer:
+This keeps the handbook focused on reusable methods without making it a second
+copy of current work. Link to the authoritative source when it changes a working
+decision, and explain how it applies. Read mixed documents statement by statement:
+a reusable meeting agenda and the current action list need different homes even
+when they share a page.
 
-- When should a future agent use this?
-- What result does it promise, and what counts as done?
-- What inputs, context, and authority does it assume?
-- Which cues change the next decision or action?
-- When should the agent stop, adapt, recover, or escalate?
-- Which evidence shows that the result is correct?
-- What change should trigger maintenance review?
+A handbook can organize reusable methods as practices, checks, Playbooks, and
+templates. These forms classify stored knowledge; they are not separate user
+workflows. One requested improvement can clarify a practice, strengthen a check,
+and adjust a template together. Choose the forms by the role each statement
+serves, keep their owners distinct, and verify the change as a whole. Preserve
+Playbooks only when the user asks to capture or revise a procedure.
 
-## Capture: explicit design
+## Practices for an area
 
-Capture starts from owner direction. The user can provide a rough intent, a structured outline,
-or a nearly finished Playbook specification. Capture treats that request as the design brief and
-does not require a completed prior example or conversation ID.
+A practice explains how to work in a particular area. Useful practices establish
+ownership, meaningful distinctions, writing conventions, method selection,
+interpretation of evidence, and the relationships an agent must consider. A
+practice belongs when it changes a recurring decision or prevents a concrete
+failure. Generic advice that adds no local meaning earns no place merely by being
+true.
 
-Capture maps the request to the Playbook questions above. It asks only for missing choices that
-would materially change the Playbook's boundary, safety, path, supporting tools, or verification.
-It does not interrogate the user merely to make an unimportant artifact look complete.
+Practice maintenance begins with the requested area's actual content and existing
+instructions. Explicit owner direction can establish a new convention. Observed
+patterns can motivate a proposal, but repetition does not prove adoption or value.
+An agent should distinguish an adopted rule, a documented observation, and a
+suggested improvement. It must not turn accidental file structure into policy.
 
-Direct direction establishes what the owner wants. It does not by itself prove that the method
-works across varied situations. When effectiveness or transfer matters, the Playbook should state
-the evidence or leave the claim bounded rather than inventing confidence.
+Organize practices around reader questions and coherent concerns. Keep entry
+points short, keep detailed guidance at its owner, and let readers enter where their
+task requires. The handbook need not become a tutorial or a prescribed lesson.
 
-Before writing, Capture checks the selected Playbooks folder for:
+## Independent checks
 
-- an equivalent Playbook that should be updated rather than duplicated;
-- a path or identifier collision;
-- a broader or narrower Playbook whose boundary would become confusing;
-- a referenced tool or script with incompatible effects; and
-- owner content that must be preserved.
+Checks state expectations and explain how to examine them. They apply whenever
+their conditions are met, including work with no Playbook. A check should make its
+scope, requirement, verification, evidence, and outcome clear enough for another
+agent to repeat the examination.
 
-A direct `/capture-playbook ...` request authorizes the described Playbook change after material ambiguity
-is resolved and the Markdown file plan is disclosed. Supporting code, dependencies, destructive
-behavior, or external effects require a separate clear user decision.
+Many important checks require judgment: writing clarity, completeness of an
+argument, agreement between notes and a report, and the strength of evidence.
+Automation can support a check without completing every judgment it requires. A
+link validator establishes that a target exists; a reviewer still needs to
+determine whether the target supports the claim.
 
-## Discover: selected-session reflection
+Checks should match the work's stated status. A precise open question can be
+an adequate draft contribution. Missing evidence cannot support a resolved claim.
+A readiness gate applies when someone claims readiness, rather than preventing
+every earlier stage of work. Distinguish failure from unavailable evidence and
+explain a decision that a check does not apply.
 
-Discover uses the current session by default or exact session IDs the user selects and the host
-can retrieve. It never enumerates ambient history, searches adjacent conversations, guesses IDs,
-or treats a past approval as current authority.
+## Repeatable Playbooks
 
-When the user selects more than one session, Discover reconstructs each independently before
-comparing them. One session does not fill gaps in another. Current clarification can shape a
-recommendation but is not retroactive evidence of what happened before.
+A Playbook preserves a recognizable task, its intended result, the judgment and
+sequence needed to reach that result, and the evidence needed to establish completion.
+It may connect practices, checks, templates, and local scripts. Those resources can
+also have useful independent roles.
 
-### Reconstruct the work
+Playbook authoring follows the user's explicit request. An intended procedure can
+be written before it has been proven through repeated use; writing it does not
+establish its effectiveness. Learning from selected work can recommend a Playbook
+when the lesson fits a repeatable task, leaving the choice to the user.
 
-Discover separates distinct completed work instances by trigger and outcome. One session can
-contain several instances, and an unfinished branch is not a demonstrated method.
+Keep a coherent task together. Split when another trigger, outcome, or maintenance
+need deserves an independent home. Preserve connected phases when their judgment
+and verification depend on one another. There is no required number of sections,
+steps, or branches, and a handbook need not contain any Playbooks.
 
-For each instance, Discover reconstructs:
+## Templates and substance
 
-- **Trigger and starting state:** what made the work necessary and what was true at the start;
-- **Outcome:** what result was sought and what counted as done;
-- **Constraints and authority:** scope, permissions, risks, owner choices, and fixed formats;
-- **Decisions and cues:** where alternatives existed and what changed the path;
-- **Activities and artifacts:** what happened and in what dependency order;
-- **Verification:** what evidence showed that the result worked;
-- **Exceptions and recovery:** failures, retries, rejected defaults, handoffs, and stop rules; and
-- **Provenance:** which claims came from the user, observed work, a selected artifact, or inference.
+A template supplies a reusable structure and prompts for substance. An adopted
+local template can encode area-specific expectations. It should be adaptable to
+the work and defer to explicit user requirements.
 
-This approach is informed by cognitive task analysis, the Critical Decision Method,
-after-action review, and research on outcome bias. Trellis does not claim to conduct a formal
-interview or quality-management assessment. The practical lesson is to expose uncertainty rather
-than fill it with plausible fiction.
+For each topic that matters to the work, supply a concrete account, an exact
+authoritative reference and its application, an unresolved question that affects
+the work, or a reasoned exclusion.
+Neither a filled heading nor additional prose demonstrates adequacy. Checks
+evaluate the resulting meaning whether or not a template was used.
 
-### Look for turning points
+## Local scope and shared practice
 
-Strong candidates often preserve:
+Place each handbook with the area whose work it serves. A workspace-root handbook
+can own shared practices while a writing, research, or customer-support area keeps its
+specialized method nearby. Explain their scopes and link shared owners rather than
+copying the same instructions into every handbook.
 
-- a correction or rejected default;
-- a hidden constraint that changed the plan;
-- a failed attempt and why it failed;
-- a cue that distinguished plausible choices;
-- a verification step that caught a believable error;
-- an exception, fallback, escalation, or handoff; or
-- stable mechanics that repeated while judgment remained contextual.
+An agent doing cross-area work may need several handbooks. Read what applies to
+the changed material and its dependencies. An area may need more specific
+guidance, but a conflicting instruction needs an explicit resolution;
+directory depth alone is not an authority system.
 
-A good result does not prove that the method was good. Discover examines the decisions,
-boundaries, and verification that produced the outcome.
+Trellis's authoring boundary remains smaller than the scope of ordinary work: its
+skills write only within selected handbooks. Agents and users apply those handbooks
+under the permissions of their actual tasks. References, captured procedures, and
+support scripts do not expand those permissions.
 
-### Apply the candidate gates
+## Shaping and learning
 
-A recommendation must be:
+Trellis's two skills support maintaining a handbook and learning from experience.
+**Shape Handbook** creates and refines the handbook in response to the user's
+intent. **Learn From Work** draws reusable lessons from selected experience.
+Shaping can establish, revise, or review; learning proposes. A proposed lesson
+does not authorize its own adoption.
+Explicit direction can shape a handbook directly, without a preceding learning
+exercise or evidence of repeated successful use.
 
-- **Grounded:** traceable to selected work or explicit clarification, with inference labeled;
-- **Significant:** worth saving and maintaining;
-- **Repeatable:** entered by a recognizable future situation;
-- **Applicable:** clear about use, non-use, and variable details;
-- **Valid:** faithful to the selected evidence rather than generic advice or hindsight;
-- **Bounded:** one trigger class and one outcome class;
-- **Usable:** followable without the original conversation;
-- **Distinct:** not already owned by an equivalent Playbook; and
-- **Safe to retain:** free of secrets, unnecessary personal data, and private residue.
+Shaping follows the requested outcome. A review examines usefulness and coherence
+and returns findings without changes. A refinement request permits the relevant
+handbook edits and their necessary review. Establishing a handbook provides minimum
+context unless the request also calls for substantive content. The existence of a
+folder alone does not decide whether to create, review, or revise it.
 
-Facts, conclusions, citations, and one-off outputs can support a Playbook but are not the reusable
-unit by themselves. Parameterize incidental names, dates, paths, IDs, and values.
+Useful questions return decisions to the person who owns them. Inspect available
+sources first, then ask about a missing intention, tradeoff, or exception when
+different answers would change the method. Obtain that answer before treating the
+dependent rule as settled. The agent still owns diagnosis, organization, writing,
+and verification; the user need not become a handbook designer. Clear requests
+need no interview, and unresolved choices can be reported honestly in a review.
 
-Finding no strong recommendation is a valid result.
+Learning can yield a useful distinction, an independent expectation, a coherent
+procedure, or a better template. It need not produce all of them. A correction or
+unfinished attempt can reveal a lesson, while its unobserved outcome remains
+unproven. A successful result does not by itself show that every action taken was
+necessary or generalizable. Keep proposed working methods separate from incidental
+results, and return enough context for the user to select a shaping request without
+requiring another agent to reconstruct the original conversation.
 
-### Return Capture prompts, not files
+Learning questions should distinguish plausible lessons: what prompted a change,
+what outcome mattered, or where a method would fail to help. Incorporate the answer
+into a useful conclusion, retaining its status as the user's present account.
+An unanswered question leaves a limit, not evidence of a cause. Supported learning
+can also conclude that existing guidance suffices or no reusable lesson is warranted.
 
-Discover does not create, update, or save a Playbook. It returns a self-contained command such as:
+## Maintenance and confidence
 
-```text
-/capture-playbook Create a Playbook named "Verify release package parity". Use it when source and generated
-packages must agree before release. The Playbook should ...
-```
+Improve a handbook when work exposes a recurring ambiguity, a missing check, a
+useful repeated method, or obsolete advice. A change to the work need not produce a
+handbook change when the existing method still serves it. Remove redundant or
+superseded material instead of requiring readers to reconcile historical accounts.
+Git can retain history; current guidance should explain the current arrangement.
 
-A useful recommendation includes enough detail for Capture to work without the original session:
+Review a handbook for usefulness as well as formal consistency: can another reader
+find what applies, act without inventing missing policy, verify the result, and
+locate unresolved matters? Keep the cost of maintenance proportional to the work
+the handbook improves. A smaller coherent handbook is a complete result.
 
-- proposed title or outcome;
-- future trigger and non-use boundary;
-- desired outcome and verification;
-- important cues, decisions, exceptions, and escalation;
-- variables Capture should parameterize;
-- evidence limits or contradictions;
-- whether an existing Playbook should be updated; and
-- a supporting-tool suggestion only when it materially improves the method.
-
-The user can edit, combine, ignore, or run each recommendation manually. Discover never invokes
-Capture on the user's behalf.
-
-## Playbook sizing
-
-Split a proposed Playbook when parts have independent triggers, outcomes, callers, authority,
-verification, recovery, stewardship, or change cadence. Keep branches together when they begin in
-the same recognizable situation and reconverge on the same outcome.
-
-Mere sequence, convenience, a shared batch, or one artifact passing to another is not enough to
-combine independent work. Conversely, do not split a method so finely that each part loses the
-judgment or verification required to be useful.
-
-A title containing “and” is a prompt to test the boundary, not an automatic failure.
-
-## Supporting tools
-
-A Playbook can rely on three kinds of support:
-
-1. **Host-native capabilities.** Prefer tools already available to the person or agent when their
-   authority and review boundary are clear.
-2. **Internal Trellis tools.** A small deterministic local operation can live under the selected
-   Playbooks folder in `_cli/`. A declaration selects one fixed built-in operation: file hashing,
-   byte comparison, one exact text replacement, or setting one existing JSON value. Internal tools
-   support a Playbook and are not separately indexed. The shared runtime uses explicit local
-   paths, bounded JSON output, no external dependencies, and a reviewed file hash before applying
-   a write. It contains no generated tool source and has no network, shell, child-process,
-   environment-secret, file-creation, deletion, permission, publication, communication, remote,
-   or consequential-judgment authority.
-3. **Project-owned scripts.** A user can explicitly ask an agent to create a script beside a
-   Playbook when broader capabilities are appropriate. The Playbook documents the interpreter,
-   dependencies, authority, effects, invocation, verification, and recovery. The script remains
-   project scaffolding rather than inheriting the internal-tool safety profile.
-
-The conservative internal-tool profile governs automation Trellis creates by default. It is not a
-policy that prevents project owners from using other code or organization.
-
-## Audit: advisory maintenance
-
-Audit reviews the selected Playbooks folder, marked Playbooks, referenced internal tools, and
-explicitly scoped project-owned scripts. It checks structure, followability, boundaries,
-verification, overlap, fragmentation, and concrete maintenance evidence.
-
-Audit remains local, static, read-only, and advisory. It does not execute or change anything,
-does not invent missing Playbooks from unrelated project content, and does not reject owner
-scaffolding merely because Trellis did not create it.
-
-## Human control
-
-The four skills have deliberately different authority:
-
-- Init can create the agreed collection README after showing its small file plan.
-- Capture can write the exact requested Playbook and separately approved support.
-- Discover is recommendation-only.
-- Audit is read-only and advisory.
-
-None of the skills silently edits `AGENTS.md`, stages version-control changes, publishes content,
-runs newly created code, installs dependencies, or communicates externally. Those decisions
-remain separate and follow the host's authority model.
-
-## What Trellis is testing
-
-The research behind Trellis informed its emphasis on cues, decision points, applicability,
-verification, interruption, recovery, and explicit human authority. The following remain product
-choices to test in real use:
-
-- Playbooks as the only user-facing reusable artifact;
-- one trigger-to-verified-outcome boundary;
-- Capture as explicit creation and Discover as optional reflection;
-- selected sessions only, with no ambient-history mining;
-- self-contained `/capture-playbook ...` recommendations;
-- declarative internal tools under the Playbooks folder;
-- a fixed-operation conservative default for Trellis-created tools; and
-- project freedom to add standalone scripts and custom scaffolding.
-
-The project Atlas records current decisions and field observations so these choices can change
-when evidence shows a better design.
+Keep evidence claims scoped. Instruction review establishes intended behavior;
+structural checks establish selected document properties; helper tests exercise
+specific program behavior; independent agent exercises demonstrate particular
+uses. Confidence across varied real work requires evidence from that work.
