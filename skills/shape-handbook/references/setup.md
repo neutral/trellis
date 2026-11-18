@@ -1,66 +1,39 @@
-# Establish the handbook
+# Set up or adopt a handbook
 
-Create or adopt the selected `<area>/handbook/` within the scope resolved in the
-skill entry point. Verify that the workspace and owning area already exist as
-directories before creating the handbook. If either is missing, report the needed
-outside-handbook setup without creating parents. A compatible existing handbook
-needs only the requested or missing setup. Discovering an unmarked folder is not
-by itself permission to adopt it. Preserve owner content when the request includes
-adoption, and reconcile conflicting conventions or duplicate or malformed markers
-before changing them.
+## Before creating anything
 
-The README identifies purpose, workspace, owning area, relevant shared handbooks,
-the authoritative files for the work, and navigation to material that actually
-exists. Include a short explanation of how to select and apply that material,
-evaluate checks, keep work with its sources, and resolve consequential uncertainty
-within the current task's authority. It must be usable without the Trellis skills
-or the setup conversation. Read and adapt the README starter, including its
-distinction between storage conventions and authorized outputs; a response-only
-review does not require a saved report. During README refinement, apply this
-orientation guidance without repeating unrelated setup steps. Omit irrelevant forms and
-avoid reproducing the full methodology or maintenance-skill restrictions as rules
-for ordinary work. Use a linked explanation only when its length or existing
-ownership makes that useful; no separate operating file is required.
+Create neither the workspace nor the area: if one is missing, say so and stop. Where the area already has a handbook, write only what the request asks for and the handbook lacks. A folder without a marker is adopted only on request, within the scope asked. When adopting, keep the owner's content, and settle conflicting conventions and duplicate or malformed markers before changing them.
 
-Add one `trellis:handbook` marker with the verified relative workspace path.
-The available layout is:
+## Layout
 
 ```text
 <area>/handbook/
   README.md
-  practices/
-  checks/
-  playbooks/
-  templates/       optional
+  practices/<name>.md
+  checks/<name>.md
+  playbooks/<name>/playbook-<name>.md
 ```
 
-Create only the README and category directories requested or needed. An otherwise
-empty handbook is valid. Do not add filler practices, checks, Playbooks, scripts,
-or a template collection. Adapt [the README starter](../assets/handbook-readme.md)
-when useful; keep local links relative.
+Create the README, which creates the folder, and only the folders the request needs; a handbook with only a README is valid. Add no filler guidance or scripts. If the request also asks for guidance, go on to its references. Setup alone calls for no review of what the handbook already holds. It changes no other handbook's README: report what those now lack.
 
-Show the workspace, area, destination, affected files, and substantive setup choices.
-Proceed under the user's setup or adoption request once material ambiguity is
-resolved. Verify the marker, its physical workspace target, the owning area, and
-navigation links. If the same request also asks for practices, checks, templates,
-or an explicit procedure, continue with the relevant authoring references after
-establishing the entry point; do not stop at setup. Setup alone does not require
-a comprehensive semantic review of existing material unless the user requested one.
+## The README
 
-After setup, return an optional blurb for the user to place in the appropriate
-`AGENTS.md`. Adapt the relative link to that instruction file's location:
+Adapt [this skill's README starter](../assets/handbook-readme.md), titled for the area. The README says what the handbook is for, its workspace and area (links to the two folders), the handbooks that also apply (each one in a folder above the area, up to the workspace root), where the area's work is kept, inside the area or not, and where each piece of guidance is, linking only what exists. Given no purpose, describe the area's work from its files and say in the report that you did. A handbook with no guidance yet says so.
 
-```markdown
-## Handbook
+Keep every point of the starter's account of how to use the handbook, its paragraph on findings and saved reports included, in words that fit: a reader must need neither this skill nor the setup conversation. Do not reproduce the methodology or present this skill's limits as rules for ordinary work. Put the account in a separate linked file only when its length or an existing file makes that useful. A later rewrite of the README follows this section alone.
 
-Working practices, checks, and Playbooks for this area live in
-[`handbook/README.md`](handbook/README.md). Consult the applicable material when
-working here. Keep the actual work in its existing files; the handbook guides how
-we approach and review it. Handbook guidance does not expand a task's authority.
+## The marker
+
+The README carries exactly one marker, on a line of its own near the top:
+
+```html
+<!-- trellis:handbook {"format":1,"workspace":"../.."} -->
 ```
 
-Return the blurb with its intended instruction-file location; never insert it.
-If future agents have no established route to the handbook, explain that adding
-this pointer is the user's remaining discovery step. Do not describe the handbook
-as automatically consulted or its method as proven. Do not generate another setup
-blurb as a routine side effect of later review or refinement.
+`workspace` is the relative path from the handbook to the workspace: one `..` for the handbook folder and one more for each folder between the area and the workspace root. That is `..` when the area is the workspace, `../..` one folder down, `../../..` two down. `format` is always `1`. The marker identifies a handbook; it does not make every file in the folder the handbook's.
+
+Write a marker only after checking that its path leads to the workspace. Correct one that disagrees with where the handbook is when the request includes handbook edits; otherwise report it.
+
+## The pointer
+
+Setup and adoption end with the [report](../SKILL.md#report), which holds the pointer text to give the user.

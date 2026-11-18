@@ -1,6 +1,6 @@
 {
   "name": "trellis",
-  "version": "0.6.1",
+  "version": "1.0.0",
   "description": "Keep the guidance agents need close to the work they do.",
   "author": {
     "name": "Vamsi Alluri",
@@ -21,7 +21,7 @@
   "interface": {
     "displayName": "Trellis",
     "shortDescription": "Give agents clear standards for doing and reviewing work.",
-    "longDescription": "Trellis preserves working methods in handbooks beside the work. Shape Handbook clarifies consequential owner decisions, creates or improves the requested guidance, and reviews its coherence and usability. Handbook READMEs explain use without Trellis installed. Learn From Work asks about missing context when it would change a lesson, then proposes improvements from selected experience. Review-only Shaping and Learning write nothing; Shaping writes only inside selected handbooks. People and agents carry out the work under their task permissions.",
+    "longDescription": "Trellis keeps how your work is done and checked in a handbook beside the work, so the next person or agent can pick it up. Shape Handbook writes down the Practices, Checks and requested Playbooks you ask for, asks about the decisions only you can make, and can review a handbook without changing it. Each handbook's README explains its use without Trellis installed. Learn From Work looks at the work you select, asks about missing context when it would change a lesson, and proposes improvements for you to choose. Handbook edits stay inside the selected handbook; review-only requests and learning change no files. You and your agents carry out the work itself, under your tasks' own permissions.",
     "developerName": "Vamsi Alluri",
     "category": "Productivity",
     "capabilities": [
@@ -32,9 +32,9 @@
     "privacyPolicyURL": "https://github.com/neutral/trellis/blob/main/PRIVACY.md",
     "termsOfServiceURL": "https://github.com/neutral/trellis/blob/main/TERMS.md",
     "defaultPrompt": [
-      "Shape a handbook for this area.",
-      "Review this handbook for coherence and useful working guidance.",
-      "Learn from this work and recommend useful handbook improvements."
+      "Write down how we do this work, so the next person can pick it up.",
+      "Review our handbook for confusing or conflicting advice, without changing it.",
+      "What should we learn from this work? Suggest handbook changes for me to choose."
     ],
     "brandColor": "#4E7D3A",
     "composerIcon": "./assets/trellis-icon.svg",

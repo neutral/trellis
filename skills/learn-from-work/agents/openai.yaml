@@ -1,4 +1,4 @@
 interface:
   display_name: "Learn From Work"
-  short_description: "Propose working methods from selected experience"
-  default_prompt: "Use $learn-from-work to examine the work I select and propose useful handbook improvements without writing files."
+  short_description: "Learn from work for next time"
+  default_prompt: "Use $learn-from-work to tell me what we should learn from this work, and suggest handbook changes for me to choose."

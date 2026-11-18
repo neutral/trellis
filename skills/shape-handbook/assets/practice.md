@@ -1,19 +1,15 @@
 # [Working concern or reader question]
 
-[What decision this practice helps and when it applies.]
+[The decision this Practice helps with, and when it applies.]
 
 ## Practice
 
-[Explain the relevant distinction or convention and how it changes the approach.
-Include consequential exceptions and uncertainty where needed.]
+[The distinction or convention, and how it changes what a contributor does. Include the exceptions that matter and what is uncertain.]
 
-## Ownership and related guidance
+## Related guidance
 
-[Link authoritative work files and relevant shared practices. Explain any deliberate
-local specialization instead of duplicating a shared rule.]
+[Link the work's files and the shared Practices that apply. Where this departs from a shared rule, say when the shared rule applies and why the exception exists; do not copy the shared rule.]
 
 ## Standing and rationale
 
-[Clearly mark consequential inferences as proposed. For
-adopted guidance, preserve the useful current rationale and evidence limits
-without adding a discovery history.]
+[Mark an inferred rule that matters as proposed. For adopted guidance, give the current reason and the limits of its evidence, not the story of how it was found.]

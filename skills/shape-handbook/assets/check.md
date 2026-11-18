@@ -2,22 +2,21 @@
 
 ## Applicability
 
-[Which work, stage, and conditions this check covers; when it does not apply.]
+[The work, stage and conditions this Check covers, and when it does not apply.]
 
 ## Requirement
 
-[State the expectation. Link exact requirements in the authoritative work files.]
+[The expectation. Link the exact requirement in the work's files.]
 
 ## Verification
 
-[What evidence to inspect, what comparison or reasoning to perform, and what
-uncertainty limits a conclusion. Reading this section does not perform the check.]
+[The evidence to inspect, the comparison or reasoning to perform, and what limits the conclusion. Reading this section does not perform the Check.]
 
 ## Outcomes
 
-- **Pass:** [Evidence sufficient to establish this expectation.]
-- **Fail:** [Evidence showing a material unmet expectation and the needed response.]
-- **Unable:** [What prevents a supported conclusion and what would resolve it.]
-- **Not applicable:** [Which applicability condition is absent and how to explain it.]
+- **Pass:** [The evidence that establishes the expectation.]
+- **Fail:** [The evidence of an unmet expectation that matters, and what to do about it.]
+- **Unable:** [What prevents a supported conclusion, and what would resolve it.]
+- **Not applicable:** [Which condition is absent, and how to explain it.]
 
-[Link relevant practices for rationale. Record actual review findings with the work.]
+[Link the Practices that give the reason. Findings go in the response unless the task asks for a saved report; say where a requested report is kept.]

@@ -1,46 +1,19 @@
-# Shape independent checks
+# Write a Check
 
-A check states an evaluable expectation for work. It applies on its own whenever
-its conditions hold, including work with no Playbook. Verification may require
-judgment; an executable test is optional support.
+A Check states an expectation for work and how to verify it. It applies whenever its conditions hold, with or without a Playbook. Verifying may take judgment. A tool can support a Check without making its judgment; a Check that needs one points to a script in a Playbook and keeps no script of its own.
 
-Inspect existing checks, relevant practices, and authoritative requirements for the work.
-Write or revise `checks/<name>.md` with a portable lowercase hyphenated name and
-headings suited to its expectation. Preserve:
+## What a Check says
 
-- **Applicability:** the work, stage, conditions, and relevant exclusions.
-- **Requirement:** the specific expectation to evaluate.
-- **Verification:** evidence to inspect, comparisons or reasoning to perform, and limits.
-- **Outcomes:** pass, fail, unable, and not applicable with meaningful reasons and responses.
+Write `checks/<name>.md` with headings that suit the expectation. It says when it applies and what it excludes, the one requirement to judge, how to verify it, and what each outcome means; [this skill's Check starter](../assets/check.md) has a prompt for each.
 
-Pass requires adequate evidence for the expectation. Fail requires evidence of an
-unmet expectation. Unable means missing access, evidence, or interpretive clarity
-prevents a supported conclusion. Not applicable means the conditions for applying
-the check do not hold. Tailor these meanings to the check rather than relying on labels alone.
+Pass needs evidence that the expectation is met. Fail needs evidence that it is not. Unable means that missing access, evidence or clarity prevents a supported conclusion. Not applicable means the conditions do not hold. Fit these meanings to the Check, each with its reason and what to do next; the labels alone are not enough.
 
-Keep the work's requirements and actual review findings in their authoritative
-files. For example, a check can ask whether a research summary supports its claims
-with sources. The research notes still hold the observations, and the summary's
-review records any unsupported claims it finds. Link relevant practices for
-rationale and authoritative requirements for exact meaning.
+Link a Practice for the reason behind a Check, and the work's requirement for its exact meaning. When the request also needs a Practice changed, change both.
 
-Describe where authorized saved findings belong without requiring an extra report
-for a task that requests findings in the response. A storage convention does not
-expand the ordinary task's requested outputs or write permissions.
+## Findings, status and overlap
 
-A precise open question may satisfy draft completeness while the underlying decision
-remains unresolved. Distinguish adequate documentation of uncertainty from resolution
-or readiness. Reading a check, filling a template, and passing a structural validator
-do not perform semantic verification.
+Say where saved findings belong without requiring a report from a task that asked for findings in the response: a storage convention adds nothing to what a task was asked to produce or allowed to write.
 
-Combine overlapping checks when their applicability and failure meaning cannot be
-distinguished. Keep independently meaningful expectations separate. Coordinate
-related practice or template changes when the requested refinement needs them.
-Explicit owner direction can establish an expectation; keep consequential inferred
-requirements visibly proposed until adopted.
+Fit the Check to the work's stated status. A precise open question can complete a draft while the decision behind it stays open. A readiness Check applies when someone claims readiness, not at every stage before that.
 
-Adapt [the check starter](../assets/check.md) or an applicable handbook template.
-Add local templates only for useful reuse. Check whether a future reviewer could
-explain each outcome from evidence. A bounded example can expose ambiguity in the
-definition; it does not authorize reviewing the actual work or changing its
-findings while shaping the handbook.
+Merge Checks whose conditions and meaning of failure cannot be told apart, and keep separate the ones that can. Before finishing, ask whether a later reviewer could explain each outcome from evidence.

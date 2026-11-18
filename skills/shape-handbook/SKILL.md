@@ -1,143 +1,122 @@
 ---
 name: shape-handbook
-description: Create, adopt, review, or refine selected area handbooks, coordinating practices, checks, Playbooks, and templates. Use when the user asks to shape working methods or assess a handbook. Review requests stay read-only; ordinary work does not itself request handbook changes or Playbook creation.
+description: Write down how an area's work is done and checked, in a handbook kept beside that work. Use when the user asks to "write down how we do X", "make a review checklist", "save this routine", "make a template" or "set up a handbook", or to change or review such guidance. Not for doing the work itself; ordinary work is not a request to change a handbook.
 ---
 
 # Shape Handbook
 
-Before applying this skill, read the full [Trellis methodology](references/methodology.md).
+Trellis keeps how an area's work is done and checked in a handbook beside that work, as Practices, Checks and Playbooks. Make the smallest coherent change that serves the request; the user need not name a kind.
 
-Help the selected handbook improve a future contributor's decisions about the
-area's work. Choose the smallest coherent change that serves the requested outcome;
-the user need not divide a concern into separate practice, check, and template tasks.
+Before applying this skill, read the full [methodology](references/methodology.md): it explains the method and the reasons for its rules. It settles no conflict between rules; where two rules here seem to collide, "Decisions before rules" governs.
 
-## Follow the requested intent
+## Words
 
-A request to create, adopt, or refine a handbook authorizes the corresponding
-changes. A review request asks for findings and remains read-only. If the user asks
-for review and fixes, apply the requested fixes within scope. Do not require a
-special invocation, a named mode, or repeated confirmation of existing authority.
+- **Workspace:** the working directory the request is about, a Git repository or not.
+- **Area:** the workspace, or a folder in it, whose work a handbook supports.
+- **Handbook:** the folder `<area>/handbook/`.
+- **Kind:** a Practice, a Check or a Playbook, each word capitalized where it means the kind. **Content of no kind:** anything else in a handbook, such as a note.
+- **Starter:** a file to copy and fill in. A Playbook's starters live in its `assets/`; one kept elsewhere in a handbook is a loose file; this skill's own, in its `assets/`, are the first shapes it adapts.
+- **Marker:** the README line recording a handbook's workspace. It decides and grants nothing.
+- **Navigation:** the README's links to the handbook's guidance.
+- **Pointer:** a short passage in an `AGENTS.md` saying where the handbook is.
+- **Host:** the agent environment running this skill; it supplies tools, permissions and any confinement.
+- **User:** whoever makes the request. **Owner:** whoever decides the area's policy, often the user.
+- **Sources:** the request, the `AGENTS.md` files that apply, the workspace's and area's READMEs, the handbook, and the area's files the request bears on.
+- **The owner's direction:** what the owner has said about how the work is done, in any source, an instruction inside a file included.
+- **Proposal:** a change nobody has asked for yet: a review finding, a line in this skill's report, or a lesson from Learn From Work, Trellis's other skill.
 
-Creating a Playbook requires a request to preserve that procedure, or the user's
-acceptance of a proposal that clearly includes it. Broad improvement, a review
-finding, or a learning recommendation alone does not authorize inventing Playbooks.
-An intended procedure can be written without prior successful use; creating it
-does not demonstrate its effectiveness or carry it out.
+## What the request authorizes
 
-## Resolve the handbook and its owners
+- **Setting up, adopting or changing a handbook:** the matching edits inside it. Adopting makes an existing folder of guidance a handbook.
+- **A review:** findings in the response, and no writes unless the user also asks for fixes or a report saved in the handbook. A place named for saved reports is a storage convention, not a request to save one.
+- **A general request to improve:** an assessment, then the edits it shows are worth making: corrections, clearer wording, and the Practices and Checks the work needs, with any rule you infer marked proposed ([Review](references/review.md)).
+- **A Playbook:** created only when the user asks to preserve that procedure, as asking for a template does ([Playbooks](references/playbooks.md)), or chooses a proposal that clearly contains it; never by a general request to improve, a review finding, a learning proposal or ordinary work.
 
-Resolve the workspace and owning area from the request and applicable project
-instructions. A workspace is an identified working directory, not necessarily a
-Git repository. Do not select the current directory when plausible alternatives
-would materially change scope. Each handbook lives at `<area>/handbook/`; its
-parent is the owning area and must be inside the selected workspace.
-Verify that the workspace and owning area already exist as directories. Never
-create their missing parents: every setup write must remain inside the handbook.
+The outcome the user asks for decides the task, and no proposal applies itself.
 
-Read an existing README's single marker to check its declared workspace:
+## Where to act
 
-```html
-<!-- trellis:handbook {"format":1,"workspace":"../.."} -->
+The request and the `AGENTS.md` files that apply identify the workspace, the area and the handbook; with no `AGENTS.md`, the request and the workspace's README do. With one plausible candidate, use it. With several, your current directory does not settle it: ask when the choice changes scope; otherwise use the one the request names most plainly and name it in the report. Treat each handbook a request names on its own.
+
+Read the sources as far as the request reaches: for one file or folder, that is the file or folder, the handbook's README and whatever else states a rule the change touches. Do not read other areas.
+
+A handbook higher in the workspace and an area's own can both apply; folder depth decides nothing between them. A local file may depart from a shared rule if it says when that rule applies and why; the exception then governs in its area. Link to a shared rule; never copy it. Raise with the user an unexplained conflict that would change an important decision.
+
+The area's files keep its plans, drafts, decisions, requirements, results and review findings: link to them, and judge a mixed document statement by statement.
+
+## Decisions before rules
+
+Read the sources first and use their answers. Existing instructions or the owner's direction settle a choice without another confirmation, example or record of success. Mark a rule you infer as proposed until the owner accepts it.
+
+Ask the user only where a missing purpose, rule, trade-off or exception would change the guidance, and never to design the handbook. Ask together, and wait for the answers before writing the rules that depend on them; carry on with the rest. A clear request needs no questions; a review reports an open choice as a finding.
+
+Apply the next three rules in this order, before any other rule or default.
+
+**1. A request the files do not bear out.** Test the request against the files before writing, a script by its source and not only its entry. The handbook already does what is asked when it holds the rule, file or script requested, in those words or others with the same effect. The request is mistaken about the handbook when it describes guidance the files lack or state differently. Either way, report that with file and line, give the readings (each thing the user may mean, with what it would change), and write nothing until the user chooses one. This covers setting up a handbook that exists and lacks nothing asked for, adding a script where one already does the same, and stating a rule a file already states. It does not cover a template whose starter exists as a loose file (the Playbook is still missing: write it under [Playbooks](references/playbooks.md)), or a handbook for a folder whose only handbook sits higher in the workspace (a different handbook: set the new one up).
+
+**2. A decision the files show as open.** It is open when two rules in one handbook contradict each other, or a file says the point is undecided. Do not decide it. When a request names one rule and two files hold conflicting versions, take the file whose words the request fits. Make the requested edit if it holds under every resolution (it stays true, or merely has no effect, whichever way the decision goes); otherwise write nothing that depends on the decision. Report it as the owner's open decision, with what each answer would change. New guidance that depends on it links both sides and says in a sentence that the point is open; existing files stay as they are.
+
+**3. An answer.** The user's answer settles an open decision and authorizes the edits that follow from it. If the user cannot decide, or says the decision is someone else's, the point stays visibly unresolved: each affected file says so in a sentence. Never choose policy silently or call the dependent work complete.
+
+## Which reference to load
+
+Load a reference only to write under it or to assess with it. A review or a general request to improve loads Review. For any other request, when the files show that nothing will be written, load none. Load them together when a concern spans kinds.
+
+- [Setup](references/setup.md): create or adopt a handbook, rewrite its README or correct its marker. Adding a navigation link needs no reference.
+- [Practices](references/practices.md): how the area approaches its work.
+- [Checks](references/checks.md): an expectation and how to verify it.
+- [Playbooks](references/playbooks.md): anything in a Playbook's folder, and temporary files.
+- [Review](references/review.md): assess a handbook, for a review or a general request to improve.
+
+Setup, Practices, Checks and Playbooks each link this skill's starter: the user's requirements come first, its headings are optional and its sample wording is not the area's policy. Filling a starter's headings, reading a Check or passing a check of format, such as a link checker, is not evidence that work is adequate.
+
+## The write boundary
+
+Every write, temporary files and test output included, stays inside the handbook the request concerns.
+
+**What a change touches.** Correct every statement in the handbook that your change makes false, whichever file holds it, an existing Playbook's assets and content of no kind included. Leave a file that carries the owner's instruction to leave it unchanged, and report what your change made false in it. Move, rename, restructure and delete nothing unasked, apart from converting content of no kind as the next paragraph says; report what looks misplaced.
+
+**Content of no kind** is the owner's: keep it in place and unchanged, apart from such a correction, until a request concerns it. A request concerns it when it names it, would duplicate it, or is a general request to improve. Then convert it into the kind that fits, a Practice or a Check: put its content in a file of that kind, in that kind's folder, remove the original, correct the links to it, and report the conversion. Where only part of it fits a kind, convert that part and leave the rest where it is. Convert nothing into a Playbook unless the user asked to preserve that procedure; a loose starter moves into the Playbook written for it ([Playbooks](references/playbooks.md)). Where no kind fits, leave it and say so in the report. Never ask about a conversion as a blocking question.
+
+Before writing:
+
+- Say which paths you will change, what any script does and the decisions that matter, ahead of the first write in the reply that makes it, then proceed.
+- Change the file that already covers a concern; add no second account. Use lowercase hyphenated names and relative local links.
+- Resolve each destination to its physical location. Refuse a path that leaves the handbook through `..` or a symlink in any parent directory, and follow no handbook symlink to reach further.
+- Read a file again before overwriting it and reconcile any change made since.
+
+Never, through this skill: edit `AGENTS.md`; initialize Git, stage, commit, push or publish; install anything outside the handbook; communicate with anyone but the user; or carry out the work a handbook describes. These limits do not restrict a separately authorized task, and delegating does not get around them.
+
+Keep out of the handbook secrets, unneeded personal data, transcripts, session identifiers, superseded accounts and the story of how a rule was found; keep a rule's current reason and the limits of its evidence.
+
+## Verify
+
+Check links, navigation, that the marker's path leads to the workspace (if not, see [Setup](references/setup.md#the-marker)), that each piece is the right kind and in the right file, and that each answer changed every rule depending on it. Then read the result as a contributor who has only the handbook, on a made-up case if that exposes an ambiguity: can they find what applies, decide, judge the result, and see an exception or what needs the owner? Your own reading is not an independent trial.
+
+A request for guidance must deliver it. Keep the README's account of how to use the handbook accurate when the change affects it; where a README has none, report that and add none unasked. Verify what was asked, not the whole handbook.
+
+## Report
+
+**You wrote something.** Four items, in this order; an item may be as long as its content needs.
+
+1. **What is left for the user.** Look for a pointer in the `AGENTS.md` files that apply: the workspace root's and any between it and the area. If none points to this handbook, the report's first line names adding one as the user's remaining step, names the file (with no `AGENTS.md`, one to create at the workspace root) and gives the pointer text below to paste. Then each open decision and each change needed outside the handbook, with what stays incomplete until it is done.
+2. **What changed or was found:** the paths, each correction, and the decision the result now helps.
+3. **What you checked,** and what you did not or could not.
+4. **Where you acted:** the workspace and the handbook.
+
+**You wrote nothing and need an answer.** Say so first. Then ask, with what each answer would change, and name the workspace and handbook you would act in. Leave the rest until you have written.
+
+**You wrote nothing and have nothing to ask**, as after a review. Items 2 to 4, with the findings in item 2. A missing pointer is one of the findings.
+
+The pointer text, with its link and "this area" adjusted to the file it goes in:
+
+```markdown
+## Handbook
+
+Working Practices, Checks, and Playbooks for this area live in
+[`handbook/README.md`](handbook/README.md). Consult the applicable material when
+working here. Keep the actual work in its existing files; the handbook guides how
+we approach and review it. Handbook guidance does not expand a task's authority.
 ```
 
-The workspace path is relative to the handbook; use `..` for a workspace-root
-handbook. Verify physical locations against the selected scope. The marker does
-not grant authority over another workspace or ownership of every existing file.
-Resolve each handbook separately in a multi-handbook request.
-
-Inspect the requested area, applicable shared guidance, and explicitly selected
-evidence. Do not search unrelated areas merely because they share a workspace.
-Root and nested handbooks can both apply; ancestry alone does not settle conflicts.
-Link shared rules at their owners, explain deliberate local specializations, and
-raise consequential unresolved conflicts.
-
-The handbook preserves how people do and review the work. Keep current plans,
-drafts, decisions, and results in the area's working files. Judge mixed documents
-statement by statement and link to the authoritative files for the work.
-Extracting a practice does not authorize cleaning up its source outside the handbook.
-
-## Resolve decisions before encoding them
-
-Identify the future task or decision the requested change should help. Inspect the
-selected sources first. Retrieve answers available there; ask the user about a
-missing purpose, conflicting rule, acceptable tradeoff, or exception only when
-different answers would change the guidance. Explain the concrete choice and its
-consequence, offering grounded alternatives when useful. Do not ask the user to
-design the handbook or choose artifact types.
-
-Ask a small batch of consequential questions and wait for the answers before
-encoding the dependent rules. Continue independent work where possible. Existing
-instructions or explicit owner direction can settle a choice without another
-confirmation. If the user cannot decide, keep that dependency visibly unresolved
-or proposed; do not silently choose policy or claim the dependent work is complete.
-A clear request needs no questionnaire. Review can report an unresolved choice
-as a finding without requiring the user to settle it first.
-
-## Load the guidance needed for this request
-
-- [Setup](references/setup.md): create or adopt a handbook, or materially revise its
-  README's scope, navigation, or explanation of use. Read the README starter when
-  writing that explanation; return the setup blurb only for setup or adoption.
-- [Practices](references/practices.md): clarify working conventions, distinctions,
-  ownership, method selection, and interpretation of evidence.
-- [Checks](references/checks.md): define independently evaluable expectations and
-  their concrete verification.
-- [Playbooks](references/playbooks.md): preserve a requested procedure and its
-  optional supporting scripts.
-- [Review](references/review.md): assess a handbook and relevant sources without
-  executing its work; use the findings within any separately requested refinement.
-
-Read the relevant task references together when one concern spans artifact types. Adapt
-the bundled assets and applicable local templates to the task.
-Create local templates only for useful reuse. Filling headings does not establish
-substantive adequacy, and sample instructions do not become adopted local policy.
-
-## Keep effects within scope
-
-All filesystem writes, including temporary files, generated support, fixtures,
-caches, and test outputs, stay inside the selected handbook. A review-only request
-performs no filesystem writes. For review-only work, prefer direct file reads;
-when shell reads are needed, use a non-login shell to avoid cache-writing login hooks.
-Resolve destinations physically and inspect every parent directory in the path. Reject
-traversal or symlinks that escape the handbook. Do not follow a handbook
-symlink to widen the boundary. Re-read targets before overwriting, reconcile
-concurrent changes that invalidate the edit, and preserve unrelated owner content.
-
-Show affected paths and material decisions before writing, using existing
-authorization to proceed. Recommend required outside-handbook changes instead of
-making them. Never edit `AGENTS.md`, initialize Git, stage, commit, push, publish,
-install outside the handbook, or communicate with others through this skill.
-Do not carry out the underlying work. Supporting-script tests use only
-fixtures inside the handbook and host confinement as described in the Playbook
-reference; authoring a procedure and performing it remain separate operations.
-
-## Verify the useful result
-
-Verify local links, navigation, artifact fit, and consistency across affected
-material. Then read the result as a contributor without this conversation or the
-Trellis skills: can they find what applies, make the intended decision, evaluate
-the result, and recognize an exception or a needed owner decision? Use a bounded
-illustrative situation when it exposes ambiguity; do not perform the actual work
-or present this author review as an independent agent exercise. Check that answers
-changed all affected guidance and that inferred rules remain proposed until adopted.
-
-Setup alone establishes an understandable entry point. Substantive authoring must
-also supply the requested working guidance; review must explain supported findings
-or why no change is needed. Keep the README's explanation of handbook use accurate
-when the requested change affects it. These are completion criteria for the chosen
-task, not a requirement to audit the whole handbook on every edit.
-
-Retain useful current rationale and evidence limits, not transcripts,
-session identifiers, secrets, unnecessary personal data, or obsolete accounts.
-Report the decision the result now helps, changed paths or findings, checks actually
-performed, and remaining dependencies. For a required user action, name the action,
-its destination, and what remains incomplete until it happens. Distinguish authored
-guidance, its discovery by future agents, and demonstrated use. When future reuse
-is requested, check the applicable project instructions for a discovery route;
-if absent, name a suitable instruction-file location and the user's remaining
-action without editing it. When another agent uses the
-result, preserve those limits and distinguish your completed work from its next task.
-Each operation retains its own authority; a skill's restrictions do not revoke a
-separately authorized task's permissions, and delegation cannot bypass the skill's
-boundaries. Structural validity and instruction quality do not establish agent
-compliance or correctness of the work.
+Do not claim that agents will find or follow the guidance, or that the work is right. When another agent acts on the result, pass these limits on and say where your work ends and its task begins.

@@ -2,38 +2,36 @@
 
 **Keep the guidance agents need close to the work they do.**
 
-Trellis maintains handbook areas in your workspace folder. A handbook helps the
-next contributor or agent find the methods a task depends on, understand what to
-check, and judge what the evidence supports. As work exposes recurring problems,
-you can refine that guidance for future tasks.
+Trellis keeps the working method for an area of work in a handbook beside that
+work. The area's files hold its drafts, notes, plans, and records; its handbook,
+the `handbook/` folder inside the area, holds how that work is approached,
+carried out, and reviewed. A handbook helps the next contributor or agent find
+the methods a task depends on, understand what to check, and judge what the
+evidence supports. As work exposes recurring problems, you can refine that
+guidance for future tasks.
 
-To support this, Trellis's skills help you create and maintain the following in a
-handbook:
+A handbook holds three kinds of guidance:
 
-- **Repeatable Playbooks:** instructions for recurring tasks, including when to
-  use them, the decisions involved, and how to check the result.
-- **Checks:** expectations to assess whenever they apply, with guidance on how to
-  verify them.
 - **Practices:** guidance for approaching work and making recurring decisions
   consistently.
-- **Templates:** reusable structures and prompts that help contributors and
-  agents produce complete, useful work.
+- **Checks:** expectations to assess whenever they apply, with guidance on how to
+  verify them.
+- **Playbooks:** instructions for recurring tasks, including when to use them,
+  the decisions involved, and how to check the result, with any starter files and
+  scripts the task uses.
 
-Together, these guide how work is approached, carried out, and reviewed in the
-workspace.
-
-Trellis provides two skills:
+Trellis provides two skills, sets of instructions that your agent follows:
 
 | Skill | Use it to |
 | --- | --- |
-| [Shape Handbook](skills/shape-handbook/SKILL.md) (`shape-handbook`) | Set up, adopt, review, or refine a handbook, keeping its contents consistent. |
-| [Learn From Work](skills/learn-from-work/SKILL.md) (`learn-from-work`) | Examine selected experience and propose useful handbook improvements for you to choose. |
+| [Shape Handbook](skills/shape-handbook/SKILL.md) (`shape-handbook`) | Set up, adopt, change, or review a handbook, keeping its contents consistent. |
+| [Learn From Work](skills/learn-from-work/SKILL.md) (`learn-from-work`) | Examine experience you select and propose handbook improvements for you to choose. |
 
 ## Install
 
-Use your host's plugin flow to install both skills together, or install the
-standalone skills. Installation uses the host or installer; Trellis's text
-instructions need no service, account, or runtime of their own.
+Use the plugin flow of your agent host, such as ChatGPT, Claude Code, Cursor, or
+Gemini CLI, to install both skills together, or install the standalone skills.
+They need no service, account, or runtime of their own.
 
 ### ChatGPT and Codex
 
@@ -96,7 +94,7 @@ official [extension reference](https://geminicli.com/docs/extensions/reference/)
 ### Standalone skills
 
 With a GitHub CLI that supports [`gh skill install`](https://cli.github.com/manual/gh_skill_install),
-you can install the current public checkout explicitly:
+you can install Trellis from a copy you clone:
 
 ```sh
 git clone https://github.com/neutral/trellis.git
@@ -104,10 +102,16 @@ gh skill install ./trellis --from-local --all --agent codex --scope user
 ```
 
 Replace `codex` with `claude-code`, `cursor`, or `gemini-cli` for another host.
-For project installation, run the installer from the target project, use
-`--scope project`, and point it to the Trellis checkout. The local-checkout recipe
-uses the files you cloned; an unpinned remote `gh skill install` can prefer a
-tagged release over the default branch.
+To install it for one project only, run this from that project's folder, giving
+the path to your clone:
+
+```sh
+gh skill install <path-to-your-clone> --from-local --all --agent codex --scope project
+```
+
+Installing from your clone uses exactly the files you cloned; installing straight
+from GitHub without naming a version may give you the latest tagged release
+instead of the newest changes.
 
 Each complete `skills/<name>/` directory can also be copied into a skill location
 supported by your host. Keep its references and assets with it. Use the host's
@@ -115,26 +119,42 @@ skill selector or invocation syntax; prefixes vary by host.
 
 ## Use a handbook
 
-Choose a workspace and an existing area within it. Ask Shape Handbook to establish
-the area's `handbook/`, or refine one that already exists. For example:
+Choose a workspace, which is the project folder you are working in, and the area
+a handbook should serve: the workspace itself or an existing folder in it, such
+as `research/`. Ask Shape Handbook to set up the area's `handbook/`, to adopt an
+existing folder of guidance as one, or to change one that already exists.
+Adopting keeps your files and adds a marker to the folder's README, creating the
+README if there is none: one hidden line that identifies the folder as a
+handbook and records its workspace. A file that is not yet a Practice, a Check
+or a Playbook stays as it is, apart from correcting a statement a change makes
+false, until a request names it, would duplicate it or asks to improve the
+handbook. Shape Handbook then moves what fits into a Practice or a Check,
+removes what it moved from the original, reports each change, and leaves what
+fits neither where it is. For example:
 
 > Set up a handbook for research/. Use this project folder as the workspace. Include
 > a check for clear writing and claims supported by sources.
 
-Setup creates the handbook README and any directories needed by the request.
-It returns an optional, path-aware `AGENTS.md` blurb for you to place manually;
-the skill never edits that file. Different areas can have their own handbooks and
-link to shared guidance.
+Setup creates the handbook README and only the folders the request needs.
+Different areas can have their own handbooks and link to shared guidance.
+
+Agents find a handbook through a pointer: a short passage in `AGENTS.md`, the
+instruction file agents read in a project. Shape Handbook never edits that file.
+When the project has no pointer to the handbook, it gives you the passage and
+names the file to put it in, and placing it is your remaining step. If your
+agent reads a different instruction file instead (ask it which file it reads),
+add a line there such as “Read `AGENTS.md` and follow it.”
 
 The handbook README explains how to use its contents without Trellis installed.
-Future contributors follow the guidance relevant to their task, perform its
-applicable checks, and ask the owner about consequential unresolved decisions.
-If the project has no existing pointer to the handbook, adding the returned blurb
-is your remaining step to help agents discover it. Creating guidance does not by
-itself establish that it has been read or successfully used.
+Future contributors follow the guidance relevant to their task, perform the
+Checks that apply to it, and ask the owner (whoever decides the area's policy,
+often you) about consequential unresolved decisions. A rule a Trellis skill
+inferred from your files or your work, rather than one you or the owner stated,
+is marked as proposed: it is a suggestion until the owner accepts it, by
+removing the mark or by asking Shape Handbook to.
 
-Ask for the outcome you need. You do not need to choose all the artifact types
-before asking for an improvement:
+Ask for the outcome you need; you do not need to name a kind of guidance. For
+example:
 
 - “Refine the team handbook so meeting follow-ups are clear and easy to review.”
 - “Save our weekly research-summary procedure as a Playbook in the research handbook.”
@@ -142,34 +162,58 @@ before asking for an improvement:
 - “Learn from this customer-support conversation and propose improvements to how we work next time.”
 
 The skills inspect selected material first and ask focused questions when your
-answer would change a working rule or lesson. Existing answers need no repeated
-confirmation. Shape Handbook explains the decision its changes support and what
-it verified. Learn From Work incorporates your answers into a useful conclusion
-and proposals to choose, or explains why no durable change is warranted.
+answer would change a working rule or lesson. They do not ask again about a
+decision you have already made, in the request or in the area's files. After a
+write, Shape Handbook reports first what remains for you to do, then what
+changed, what it checked and what it did not, and where it acted. When it has
+written nothing because it needs your answer, it says so first. Learn From Work
+incorporates your answers into its conclusion and proposals, or explains why no
+durable change is warranted.
 
-A Playbook lives at `playbooks/<name>/playbook-<name>.md`. Checks apply independently
-of Playbooks. A handbook needs only the material that serves its work.
+A Playbook lives in `playbooks/<name>/`, as `playbook-<name>.md` with any
+scripts, references, and starter files beside it. Checks apply whether or not a
+Playbook exists, and a handbook holds only the guidance its work needs.
 
 ## Scope and control
 
 Shape Handbook writes only inside the selected handbook; review-only requests
 produce findings without file changes. Learn From Work writes nothing and never
-invokes Shape Handbook automatically. It uses the current conversation, exact
-sessions you select, or explicitly supplied accounts and artifacts.
+invokes Shape Handbook: it returns each proposal as a request you can edit, and
+you choose a proposal by giving that request to Shape Handbook. Learn From Work
+uses the current conversation, specific sessions you select, or accounts of work
+and files you explicitly supply.
 
-Your request authorizes the corresponding handbook edits. Preserving or revising
-a Playbook requires an explicit request for that procedure, including a proposal
-you choose to adopt. Creating the Playbook does not carry out its work. People and
-agents apply handbook material under the authority of their ordinary tasks.
+Your request authorizes the corresponding handbook edits. A Playbook is created
+only when you ask to preserve a procedure or choose a proposal that contains one.
+Asking for a template is such a request: the result is a Playbook that explains
+when and how to use the template, with the starter file inside. Creating the
+Playbook does not carry out its work. People and agents apply handbook material
+within their ordinary tasks; a handbook permits nothing those tasks did not
+already permit.
 
-Optional Playbook scripts operate within the declared workspace and task scope.
-Review and test their effects, and use host confinement when executing them.
-Reading a check or completing a template does not establish that its expectation
-has been met; perform the actual verification and keep evidence limits explicit.
+Scripts are optional and live with their Playbook. A script Shape Handbook
+writes only checks and reports, unless it is run with a flag that asks it to
+change files. It stays inside the workspace unless its Playbook says what else
+it reaches, such as another folder or a web service, and saying so does not
+allow it: the task that runs the script must already be allowed that reach.
+Before a script runs, ask your agent to show you its row in the Playbook's
+scripts table, which gives what it reads, what it writes and the flag that makes
+it write, and what the Playbook says it reaches outside the workspace. Have it
+run first without that flag, so that it only reports. A script Shape Handbook
+did not write or change may have no row and may write without any flag; treat it
+as one that writes. If you are not sure your agent is limited to the workspace,
+treat it as not limited: do not let it run a script in its write mode, or one
+that reaches outside. Run a script in its write mode only where your agent host
+limits it to the workspace, and one that reaches outside only in a task that is
+allowed that reach.
+
+Reading a Check or completing a starter does not establish that the work meets
+its expectations: that takes the actual verification, with a statement of what
+the evidence does not show.
 
 ## Documentation and license
 
 Read the [methodology](METHODOLOGY.md) for the reasoning and the
-[contract](CONTRACT.md) for exact product boundaries. [Privacy](PRIVACY.md) and
+[contract](CONTRACT.md) for the exact specification. [Privacy](PRIVACY.md) and
 [terms](TERMS.md) describe data handling and distribution. Original Trellis
 material is dedicated under [CC0 1.0 Universal](LICENSE).

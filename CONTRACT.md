@@ -1,278 +1,126 @@
 # Trellis handbook contract
 
-Trellis maintains the working method for a body of work. A workspace can contain
-several handbooks, each at `<area>/handbook/`. The area keeps the actual work, such
-as drafts, research notes, plans, and customer records. Its handbook keeps the
-practices, checks, Playbooks, and templates used to do and review that work.
+## What this contract specifies
 
-The two skills work through the host's normal agent tools and need no Trellis
-service or mandatory runtime.
+Trellis keeps the working method for an area of work in a handbook beside that work. This contract specifies the handbook format, the boundary the two Trellis skills keep, and what each skill returns. It is written for people and for tools that build on the format.
 
-## Scope and authority
+The skill files are the instructions an agent follows, and they implement this format. Each skill's `SKILL.md` is sufficient on its own and defines the words it uses. Where a skill file and this contract differ, an agent follows the skill file, and the difference is a defect to correct. The [methodology](METHODOLOGY.md) explains the method and the reasons for its rules, and each skill reads it before it acts; it settles no conflict between a skill's rules, which that skill's `SKILL.md` settles. Each skill folder carries a complete copy of the methodology, at `references/methodology.md`, and of the license, generated from their sources and not edited separately.
 
-- **Workspace:** an explicitly identified working directory, which need not be a
-  Git repository.
-- **Area:** the workspace or a folder within it whose work the handbook supports.
-- **Handbook:** `<area>/handbook/`, the folder holding that area's working methods.
-  Its parent directory is the owning area.
+The skills work through the host's ordinary agent tools and need no Trellis service or runtime.
 
-Resolve the workspace and owning area from the request and relevant project
-instructions. The workspace and owning area must already exist;
-initialization creates the handbook within those directories. Do not infer the
-workspace from the agent's current directory when several plausible roots exist.
-Ask only when the choice changes scope.
+## Words
 
-Handbooks reference shared rules at their owners. Root and nested handbooks can
-both apply; filesystem ancestry does not silently resolve conflicting rules.
-Explain deliberate local specializations and raise a consequential unresolved
-conflict with the user.
-
-Trellis skills may inspect the requested area, applicable shared guidance, and
-explicitly selected evidence. All their filesystem writes, including temporary
-files, generated support, and test outputs, stay inside the selected handbook.
-Review-only Shaping and Learn From Work perform no filesystem writes. For a request
-covering several handbooks, resolve each one separately. The request does not
-authorize other workspace writes. Avoid reading unrelated areas merely because
-they share a workspace.
-
-Resolve paths against their physical locations before writing. Refuse path
-traversal or a symlink that makes a destination escape the selected handbook.
-Do not follow a handbook symlink as a way to expand the write scope. Re-read
-existing targets before overwriting them; if concurrent changes invalidate the
-reviewed edit, reconcile the change before writing. Preserve unrelated owner
-content. Report needed edits outside the handbook as recommendations.
-
-Never retain secrets, unnecessary personal data, transcripts, or session
-identifiers in handbook artifacts.
-
-Skills do not edit `AGENTS.md`, initialize Git, stage, commit, push, publish,
-install dependencies outside the handbook, run described work, or communicate
-with others. An ordinary agent task that uses handbook material retains its own
-scope and authorization. Maintaining a Playbook and carrying out that Playbook
-are distinct operations.
+- **Workspace:** the working directory a request is about, a Git repository or not.
+- **Area:** the workspace, or a folder in it, whose work a handbook supports; it keeps the work itself.
+- **Handbook:** `<area>/handbook/`, the folder that keeps how the area's work is done and checked. Its parent is its area; a workspace can hold several.
+- **Marker:** the README line that records a handbook's workspace.
+- **Host:** the agent environment that runs a skill; it supplies tools, permissions and any confinement.
+- **User:** whoever makes the request. **Owner:** whoever decides policy for the area, often the user.
+- **Starter:** a file to copy and fill in. A Playbook's starters live in its `assets/`; one kept elsewhere in a handbook is a loose file. Shape Handbook's own, in its `assets/`, are the first drafts it adapts.
+- **Playbook entry:** the file `playbook-<name>.md` in a Playbook's folder.
+- **Pointer:** a short passage in an `AGENTS.md` saying where the handbook is.
 
 ## Handbook layout
 
 ```text
 <area>/handbook/
   README.md
-  practices/
-  checks/
-  playbooks/
-    <name>/
-      playbook-<name>.md
-      scripts/                 optional
-      references/              optional
-  templates/                   optional
+  practices/<name>.md
+  checks/<name>.md
+  playbooks/<name>/
+    playbook-<name>.md   the Playbook entry
+    scripts/             optional: scripts and their tests
+    references/          optional: longer guidance read only when a step needs it
+    assets/              optional: files a step copies, fills or feeds to a script
+  .scratch/              only while needed: test output and temporary files; holds a .gitignore containing `*`
 ```
 
-Handbook setup creates only the README and the category directories requested or needed.
-An otherwise empty handbook is valid. Do not add placeholder practices, checks,
-Playbooks, tools, or a template collection without a concrete use.
+A folder is a Trellis handbook when it is `<area>/handbook/` and its README carries exactly one marker whose path leads to the workspace. That is all a handbook must satisfy. The rest of this section (the files of each kind, names, the README's contents, the Playbook folder and scripts) describes how Shape Handbook writes and revises ([existing handbooks](#existing-handbooks)).
 
-The README identifies purpose, workspace, owning area, relevant shared handbooks,
-the authoritative files for the work, and navigation to material that actually
-exists. It also explains how to select and apply the available guidance without
-Trellis installed: checks require evidence, work stays with its authoritative
-sources, unresolved consequential decisions go to the owner, and ordinary tasks
-retain their own permissions. Keep this orientation brief and maintain it when
-affected by the requested change. A separate operating document is optional and
-must be reachable from the README if it owns that explanation.
-Storage conventions identify homes for authorized outputs, not an obligation to
-create extra files. A task requesting findings in the response does not thereby
-request a saved report. Check definitions and README guidance must preserve this
-distinction when describing where findings belong.
-The portable marker is one line:
+A handbook holds three kinds of guidance: Practices, Checks and Playbooks. A README with its marker is a complete handbook. Shape Handbook writes no placeholder content and uses lowercase hyphenated names and relative local links; these are the skill's own conventions, not a test of any handbook.
+
+A rule a skill infers, in guidance of any kind, stays marked as proposed until the owner accepts it. Until then it is a suggestion, not the area's policy; the owner accepts it by removing the mark or by asking Shape Handbook to. The mark's wording is Shape Handbook's convention, not part of the format.
+
+Anything else in a handbook folder is content of no kind, and is the owner's. Shape Handbook keeps it as it is until a request concerns it, then converts what fits into a Practice or a Check, and converts nothing into a Playbook the user has not asked for.
+
+Filling a starter's headings, reading a Check or passing an automated validation, such as a link checker, is not evidence that work is adequate, and a handbook does not guarantee that agents comply or that the work is correct.
+
+### README
+
+The README identifies the handbook's purpose, its workspace and area, the handbooks that also apply, where the area's work is kept, and links to the guidance that exists. It also says briefly how to choose and apply that guidance without Trellis installed; a separate file may hold that account when the README links to it.
+
+When a README or a Check names a place for saved findings, that is a storage convention, not a request to save a report.
+
+### Marker
+
+The README carries exactly one marker, on a line of its own:
 
 ```html
 <!-- trellis:handbook {"format":1,"workspace":"../.."} -->
 ```
 
-`workspace` is a relative directory path from the handbook to the declared
-workspace; use `..` for a workspace-root handbook. The owning area is always the
-handbook's parent. The marker identifies a handbook, not automatic ownership of
-every file within it. Adopt an existing folder only within the user's requested
-scope, preserving existing content and resolving conflicting conventions.
+`workspace` is the relative directory path from the handbook to its workspace: `..` when the area is the workspace. `format` is `1`. The marker identifies a handbook and records the workspace it belongs to. It does not decide which workspace a request is about, give authority over another workspace, or make every file in the folder the handbook's.
 
-Use relative local links for portable navigation.
+### Practices
 
-## Practices
+A Practice explains how to approach, organize and maintain work in the area. It changes a real working decision and is specific enough to apply. Its file is `practices/<name>.md`, one per concern or reader question.
 
-Practices explain how to understand, organize, approach, and maintain work in the
-area: ownership, distinctions, writing conventions, method selection, and the
-interpretation of evidence. They must change a real working decision and remain
-specific enough to apply. Organize files by a coherent concern or reader question.
+### Checks
 
-Keep the content and results of a task with its working files. A practice explains
-how contributors approach and review that kind of work. For example, a customer
-case records the request, agreed response, and outcome; a practice can explain how
-to assess the request and when to seek help. A document may contain both kinds of
-material, so judge each statement before deciding where it belongs.
+A Check states an expectation and how to verify that work meets it: its applicability, requirement, verification and outcomes. Verification can take judgment and need not be an executable test. The outcomes are pass, fail, unable and not applicable, each with reasons that fit the Check.
 
-Explicit user direction can establish a practice. Existing instructions provide
-evidence of adopted conventions. Repeated observed patterns can suggest a practice
-but do not automatically make it a rule. Keep a consequential inference visibly
-proposed until adopted. Retain useful current rationale, not discovery transcripts
-or obsolete accounts. Link to authoritative work files instead of copying them.
+A Check applies whenever its conditions hold, with or without a Playbook. One that needs a tool points to a Playbook's script: Checks have no scripts of their own.
 
-## Checks
+### Playbooks
 
-A check states an expectation and how to verify that work meets it. State its
-applicability, requirement, concrete verification, and outcomes. Verification can
-require judgment; it need not be an executable test. Outcomes distinguish pass,
-fail, unable, and not applicable with reasons appropriate to the check.
+A Playbook keeps one coherent repeatable task with its supporting files, in `playbooks/<name>/`. Its entry says when to use it and when not, its intended outcome, its method, the Checks that apply and the evidence of completion, and how to recover or when to stop. It names each file a step takes from the Playbook's `assets/` or `references/`. Its headings are whatever suits the task.
 
-Checks apply independently of Playbooks. A precise open question can satisfy a
-completeness check while the underlying decision remains unresolved. Reading a
-check, filling a template, and passing a structural validator do not perform its
-semantic verification. Keep the work's requirements and actual review findings in
-their authoritative files; handbook checks describe the reusable review.
+A reusable structure, together with how it is to be used, is a Playbook.
 
-Use `checks/<name>.md`. Avoid overlapping checks whose applicability and failure
-meaning cannot be distinguished. A check may reference a practice for its rationale
-and an authoritative requirement for the exact meaning being checked.
+### Scripts
 
-## Playbooks
+Scripts belong to a Playbook, in `playbooks/<name>/scripts/`, in any suitable language. They are optional, each used by a step of its Playbook. For a script a skill writes or changes:
 
-Shape Handbook creates or revises the Playbook explicitly requested by the user. Direct
-intent is a sufficient brief; a history of successful use is not required.
-Do not infer a creation request from ordinary project work, a proposed lesson,
-a review finding, or a general request to improve a handbook. An explicit request
-to preserve a procedure or the user's adoption of a proposal supplies that intent;
-no separate capture command is required.
+- The entry lists it in a scripts table: its command (written relative to the workspace root and passing that root explicitly), what it reads, what it writes and its modes. The entry also names the interpreter and dependencies the scripts need, and who else calls them, or "none found".
+- It is read-only by default: it checks or reports, and writes only under an explicit flag. With no write mode, its modes cell says "reports only".
+- It takes explicit paths rooted in the workspace and refuses a path that leaves it, including through a symlink.
+- Its effects stay inside the workspace unless the entry declares what it reaches outside, such as another folder, a network service or a secret; a path it is given is still refused when it leaves the workspace. A declaration grants nothing.
+- It fails closed: a refusal exits non-zero and leaves no partial output.
+- Its test sits beside it, named for the script file without its extension (`sync.mjs`, `sync.test.mjs`), with fixtures in `scripts/fixtures/`.
 
-Each Playbook lives in `playbooks/<name>/playbook-<name>.md`, using a lowercase
-hyphenated name. Keep one coherent repeatable task together with its supporting
-files. Preserve when to use the Playbook, its intended outcome, relevant context,
-judgment, method, applicable checks, completion evidence, and meaningful recovery
-or stop conditions.
-Use headings suited to the task; templates are adaptable. Separate tasks when their
-triggers, outcomes, or maintenance needs can usefully stand independently. Do not split
-connected phases simply to satisfy a fixed size or number of steps.
+Path checks in a script, and its place in a handbook, are not a sandbox: only the host can confine a run.
 
-### Supporting scripts
+### Existing handbooks
 
-Prefer ordinary instructions and existing workspace capabilities. Add supporting
-scripts only when requested or clearly included in the agreed Playbook design and
-they materially improve repeated work. Document the interpreter, dependencies,
-workspace root, explicit inputs and outputs, effects, invocation, verification,
-failure handling, and recovery. Do not duplicate canonical work into support files.
+The layout and the arrangement of Playbooks and scripts above also describe how Shape Handbook writes and revises. They are not a test an existing handbook must pass. A Playbook arranged differently is still a Playbook, and a review reports a difference only when it causes a concrete problem for a contributor.
 
-Scripts may use Node.js, Python, or another suitable language. Their work and data
-effects must stay inside the declared workspace and the narrower task scope. Do
-not access network services, secrets, or outside-workspace data as an implicit
-extension of a local helper. Runtime and interpreter libraries are environment
-dependencies, not authority to act on outside data. Resolve input and output paths,
-reject escapes and unsafe symlinks, and avoid implicit current-directory targets.
+## Scope and authority
 
-Path checks in source code are not a sandbox for arbitrary executable code. Use
-the host's workspace confinement when executing scripts, review their actual
-effects, and never promise enforcement solely because a script lives here.
+Every write, including temporary files and test output, stays inside the handbook the request concerns, with no path out by traversal or symlink. A review writes nothing unless the user also asks for fixes or a report saved in the handbook.
 
-During skill authoring, exercise scripts only on fixtures and outputs inside the
-selected handbook, with caches and temporary outputs also contained there. If the
-host cannot provide the required confinement, provide the script for review and
-state the execution limitation rather than running it with broader authority.
+The skills never:
 
-## Templates
+- edit `AGENTS.md`, initialize Git, stage, commit, push, publish, install anything outside the handbook, or communicate with anyone but the user;
+- run the work a handbook describes;
+- read areas the request does not concern, beyond the handbooks that apply to it, or history the user did not select;
+- create the workspace or the area, or a Playbook for a procedure the user has neither asked to preserve nor chosen in a proposal that clearly contains it;
+- move, rename, restructure or delete what the request did not ask them to, apart from Shape Handbook converting content of no kind that the request concerns;
+- keep in a handbook secrets, unneeded personal data, transcripts, session identifiers, guidance that has been superseded, or the story of how a rule was found.
 
-Templates provide reusable structures and substantive prompts. Skills can use
-their bundled assets or relevant handbook templates, preserving explicit user
-requirements. Add a local template only when its reuse is useful. A template can
-shape a practice, check, Playbook, or an artifact made during ordinary work;
-Trellis skills still write only inside the handbook. Filling headings is not
-evidence of adequacy. Do not treat sample instructions as adopted local policy.
-
-## Shared methodology
-
-Before applying Shape Handbook or Learn From Work, read the full Trellis methodology.
-Each skill includes it at `references/methodology.md`, with `references/CONTRACT.md`
-beside it so the methodology's contract link also works in a standalone skill.
-These are complete copies of the authoritative methodology and contract, maintained
-in agreement with their sources rather than edited independently.
+While authoring a script, Shape Handbook runs only its tests, on fixtures, and only where it knows the host confines the run to the workspace. Maintaining a Playbook and carrying it out are separate operations: a task that uses a handbook keeps its own authority, and delegating does not get around a skill's limits. The presence or absence of a handbook folder authorizes nothing.
 
 ## Shape Handbook
 
-`shape-handbook` creates and refines the working method preserved in selected
-handbooks. It can establish or adopt a handbook, make coordinated changes across
-artifact types, or review the collection. Infer the operation from the user's
-requested outcome; a folder's presence or absence does not authorize an operation.
-The user need not classify a problem into practices, checks, or templates before
-asking for an improvement.
+`shape-handbook` creates and changes the working method kept in handbooks, and can review it. It asks for no special command, named mode or repeated confirmation. Its result takes one of three forms:
 
-A setup request authorizes the required README and useful directories. A broader
-request can include substantive authoring in the same task. A creation or refinement
-request authorizes the corresponding handbook edits once material ambiguity is
-resolved. Reuse existing authorization rather than introducing mode-selection
-or repeated confirmation steps. Playbook authoring retains the explicit intent
-requirement above. A proposed lesson is not an instruction to apply itself.
-
-Identify the task or decision the requested guidance should improve. Inspect
-selected sources before asking for information. Ask about a consequential missing
-purpose, rule, tradeoff, or exception when different answers would change the
-guidance; obtain the answer before encoding the dependent rule as settled. Use
-existing owner direction without asking again. Continue independent work and keep
-unanswered dependencies explicit. The user need not design the artifact structure.
-Clear requests do not require an interview, and reviews may report unresolved
-choices as findings.
-
-A review-only request produces findings without writing reports, temporary files,
-or fixes, and without executing Playbooks, scripts, tests, or the underlying work.
-Report scope, coverage, evidence, practical consequences, and the smallest useful
-next step. A missing handbook is a finding, not permission to create one. Requested
-refinements may include the review necessary to make the change; they do not
-require a separate review invocation or a comprehensive audit of unrelated content.
-
-After setup or adoption, return an optional path-aware `AGENTS.md` blurb explaining
-where the handbook lives and how to consult it, with its intended destination.
-If no discovery route is established, identify adding that pointer as a remaining
-user action. Do not edit the instruction file or claim future agents will
-automatically consult the handbook.
-For refinements intended to support future reuse, also check the applicable
-project instructions and report any missing discovery pointer as a user action
-with its intended location. This does not require repeating the setup blurb.
-Verify the requested changes together: useful artifact fit, canonical ownership,
-scope, relative links, consistent requirements, and evidence limits. Read the result
-for whether a contributor without the original conversation can find what applies,
-make the intended decision, evaluate the result, and recognize exceptions or needed
-owner decisions. Distinguish this author review from observed independent use.
-Report the practical improvement, performed checks, and specific remaining actions.
-Setup alone supplies an entry point; substantive requests also require the
-requested guidance, and review returns supported findings or a no-change conclusion.
+- **It wrote something:** four items in order: what is left for the user, what changed or was found, what was checked and what was not, and the workspace and handbook acted on. When no applicable `AGENTS.md` (the workspace root's, or any between it and the area) holds a pointer, the first line says that adding one is the user's remaining step, with the file and the text to paste.
+- **It wrote nothing and needs an answer:** it says so first, then asks, with what each answer would change, and names the workspace and handbook it would act in.
+- **It wrote nothing and has nothing to ask:** what was found, what was checked and what was not, and the workspace and handbook acted on; a missing pointer is one of the findings.
 
 ## Learn From Work
 
-`learn-from-work` draws reusable lessons from selected experience. Use the current
-conversation by default, exact sessions selected by the user and retrievable by
-the host, or explicitly supplied accounts of work and artifacts. Do not enumerate
-unselected history or treat references in a source as permission to read their targets.
+`learn-from-work` draws reusable lessons from selected experience and proposes handbook changes. It writes no files and never invokes Shape Handbook: the user chooses a proposal by giving its request to Shape Handbook. Its reply leads with the conclusion as far as the evidence goes, names the sources it examined and the guidance it read, and takes one of three forms:
 
-Reconstruct the selected work before generalizing: distinguish stated intent,
-observed actions, decisions, results, and inferred causality. An unfinished attempt
-can reveal a useful lesson without demonstrating success. Consider practices,
-checks, Playbooks, templates, and refinements to an existing handbook according to
-their fit. Do not force every lesson into a procedure or adopt an observed pattern
-as policy. Findings and one-off results remain with the work they concern.
-
-Ask a question grounded in the selected episode when its answer would change the
-recommendation and is not already available. Wait for the dependent answer before
-finalizing that recommendation; continue supported independent analysis. Incorporate
-the reply without rewriting historical evidence. If an answer is unknown or
-declined, state the resulting limit rather than repeatedly asking or inventing
-certainty. Questions are not a required stage when the evidence is sufficient.
-
-Return evidence-backed proposals and self-contained, editable `shape-handbook`
-requests. Lead with the synthesized lesson or supported no-change conclusion;
-questions alone are not a completed result once answers are available.
-State relevant context, intended improvement, appropriate artifact types,
-verification, and evidence limits. A destination can remain unresolved when that
-does not prevent a useful proposal. No worthwhile recommendation is a valid outcome.
-Learning never writes files or invokes Shaping automatically.
-
-## Evidence
-
-Skill instructions describe intended behavior. Structural tests, executable helper
-tests, installation checks, and independent agent exercises support different
-claims. Report what was actually tested and its limits. A maintained handbook
-supports continuity of method across sessions; it does not guarantee agent
-compliance or the correctness of the underlying work.
+- **Proposals:** for each, a self-contained request the user can edit, beginning "Use the Shape Handbook skill to …" and carrying one lesson: the kind of guidance that fits, the context, each handbook file it would revise and what that file says now, how to verify the change and the limits of the evidence.
+- **A lesson waits on an answer:** the requests that depend on no answer, then each waiting lesson with its question and what each answer would change.
+- **Nothing to propose:** whether existing guidance already serves or the evidence cannot support a lesson, and what is missing; no request.

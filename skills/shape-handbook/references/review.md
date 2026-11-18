@@ -1,90 +1,47 @@
 # Review the handbook
 
-Review asks what makes the selected handbook useful, coherent, and maintainable.
-It returns findings without filesystem writes or execution. Do not initialize a
-missing handbook or apply suggested fixes merely because a review exposed them.
-If the user also requested refinement, use the findings to guide those authorized
-changes under the relevant authoring references.
+A review asks whether the handbook is useful, coherent and worth its upkeep. It runs nothing: read with the host's file tools, and where only a shell can list or read, run read-only commands and nothing else.
 
-Inventory the selected README, practices, checks, Playbooks, templates, and support
-files. Honor narrower scope. Otherwise cover the selected material and report
-omissions; use bounded batches rather than silently sampling. Inspect relevant area
-sources when a finding depends on them, and state limits when sources are unavailable.
-Unrelated owner material is not a defect because Trellis did not create it.
+A missing handbook is a finding, not a reason to create one. When the user also asked for changes, the findings guide them under the other references.
+
+**A general request to improve a handbook** uses this page to assess, then writes what the assessment shows is worth doing. Read its README and the guidance it holds; every section below supplies questions, and "The findings" gives the form. Correct what the sources settle (a statement the owner's direction contradicts, a broken link, navigation to something that does not exist), rewrite guidance a contributor could misread, and add the Practices and Checks the work needs, marking any rule you infer as proposed. Convert content of no kind as the skill's write boundary says. Create no Playbook, and move nothing else that looks misplaced: report it. Report what you did not change as findings, each with the smallest useful next step; changing nothing is a valid result.
+
+## Coverage
+
+Cover the README, Practices, Checks, Playbooks with their scripts, references and assets, and anything else in the folder, or the narrower scope the user sets. Report what you left out; with too much for one pass, work in stated batches, never a silent sample.
+
+Read the area's files when a finding depends on them, and say when one is unavailable. Content of no kind is not a defect. Nor is an empty folder or a handbook with only a README, unless a concrete need is unmet.
 
 ## Assess usefulness
 
-Begin with the area's work and a future decision its handbook should improve.
-Identify when a contributor would need the guidance and how they could check the
-result. Use these questions where they bear on the requested scope, then examine
-the artifacts that support the answers. Follow the README as a reader without the
-Trellis skills or original conversation. Check that it explains how to use the
-available guidance and makes the relevant owner reachable. Distinguish missing
-orientation, an unresolved owner decision, and an actual contradiction; each needs
-a different repair. Ask for owner input only when needed for a supported finding,
-otherwise report the decision needed without turning review into a compulsory interview.
+Start from the area's work and a decision the handbook should help with: when would a contributor need this guidance, and how would they check the result? Follow the README as a reader who has only the handbook: does it say how to use what is there, and lead to the method, scope, constraints and sources a task depends on, without reconstructing past conversations? Then ask, where it bears on the request:
 
-| Dimension | Review question |
-| --- | --- |
-| Continuity | Can the next contributor find the applicable working method without reconstructing past conversations? |
-| Context | Can they find the scope, working constraints, and source material their task depends on? |
-| Quality and review | Are expectations, verification, and evidence limits clear for the work's current status? |
-| Learning | Does selected experience reveal recurring problems or useful lessons worth proposing for the working method? |
-| Shared understanding | Are responsibilities, important distinctions, and expectations clear across contributors? |
-| Knowledge organization | Can readers find authoritative guidance without reconciling duplicate accounts? |
-| Local relevance | Does the guidance improve a decision in this area enough to justify the reading, steps, and maintenance it adds? |
-| Ongoing improvement | What needs clarification, correction, or removal in light of documented changes to the work? |
+- **Local relevance:** does the guidance improve a decision here enough to justify the reading, steps and upkeep it adds?
+- **Learning and upkeep:** what needs clarifying, correcting or removing given documented changes to the work, or a recurring problem in experience the user points to?
 
-Apply judgment to the area's needs and the evidence available. These dimensions
-do not require corresponding handbook sections or a score for every question.
-Tie each finding to a concrete gap and its consequence for the work. Prefer a
-correction at the existing owner when it serves the same decision. A no-change
-review is useful when the current guidance suffices. Missing historical evidence
-does not itself establish a defect. For learning, use only experience already
-selected for this review; further investigation can be proposed
-when needed. Keep proposed lessons distinct from adopted guidance. Reviewing a
-handbook does not invoke Learn From Work, adopt a proposal, or create a Playbook.
+These call for no matching sections and no scores. A review that finds nothing to change says why; missing history is not itself a defect.
+
+Propose a lesson only from that experience, apart from adopted guidance. A review does not invoke Learn From Work, Trellis's other skill, or apply a proposal.
 
 ## Assess the working arrangement
 
-- **Scope and ownership:** README purpose, workspace declaration, authoritative work
-  files, useful navigation, local links, and deliberate shared/local specializations.
-- **Practices:** the decisions they change, applicability, meaningful distinctions,
-  exceptions, and a clear distinction between proposed and adopted guidance.
-- **Checks:** independent applicability, evaluable requirements, actual verification,
-  and meaningful pass, fail, unable, and not-applicable outcomes.
-- **Playbooks:** when to use them, outcome, context, judgment, connected method, applicable
-  checks, completion evidence, and useful recovery or stop conditions.
-- **Templates:** substantive prompts, adaptable structure, and sample instructions
-  clearly distinguished from adopted local policy.
+- **Scope:** the README's purpose; its marker (one, on its own line, with a relative path that leads to the workspace); where the work is kept; navigation and local links; a pointer in the `AGENTS.md` files that apply; each local exception to a shared rule, with its reason.
+- **Practices:** the decision each changes, when it applies, its exceptions, whether responsibilities are clear, and whether proposed and adopted guidance can be told apart.
+- **Checks:** whether each applies on its own, can be judged, has real verification and limits of evidence fit for the work's status, and gives pass, fail, unable and not applicable a meaning.
+- **Playbooks:** whether a contributor could tell from its "when to use" when to open it; whether it produces one outcome or only covers a subject; whether the choices the task calls for show at the steps where they arise or are reduced to fixed steps; whether its completion can be seen in evidence; and the Checks it calls, and how it recovers and stops. For a starter: whether its use is explained, it prompts for substance, and sample wording is apart from adopted policy.
 
-Compare artifacts for overlap, contradictory expectations, fragmented reasoning,
-duplicated shared rules, and mismatched scopes. Judge mixed documents statement by
-statement. Current task lists, agreed plans, customer records, and actual review
-findings remain with the work they concern. Empty categories and an otherwise
-empty handbook are valid without a concrete unmet need.
+Compare the pieces for overlap, contradiction, reasoning split across files, copied shared rules and mismatched scope: each rule needs one place. An open question can complete a draft without settling the decision.
 
-Do not review the actual work merely to examine the definition of its check.
-An open question may satisfy draft completeness without resolving the decision;
-filled headings and valid links do not establish substantive support.
+## Scripts and layout
 
-## Inspect support and maintenance evidence
+Compare each script's source with what its Playbook entry says: its command, what it reads and writes, its modes, and what it reaches outside the workspace. Look for implicit targets, paths or symlinks that leave the workspace, and undeclared reach. Say what reading alone cannot show; a script's own path checks are not a sandbox.
 
-Read referenced scripts statically. Compare their source with the documented
-interpreter, dependencies, workspace and task scope, inputs and outputs, effects,
-invocation, verification, and recovery. Identify implicit targets, escaping paths
-or symlinks, undeclared network or secret access, and effects on data outside the workspace.
-Do not run scripts, tests, or Playbooks during review. Explain static inspection
-limits; source path guards are not a sandbox for arbitrary code.
+The layout in [Playbooks](playbooks.md) is how this skill writes, not a test an existing handbook must pass. Report a difference only when it causes a concrete problem for a contributor, such as a script nobody can find or run safely, or a starter nobody knows how to use.
 
-Base maintenance findings on concrete evidence: conflicting current guidance,
-broken references, explicit replacement, observed failures, changed requirements,
-or a documented contract that differs from source. Age or missing telemetry alone
-does not prove staleness or disuse. A directly requested method need not have an
-operational history, but claims of effectiveness require evidence.
+## Evidence of staleness
 
-Lead the report with scope, coverage, and consequential findings. For each, identify
-the affected path, evidence, practical consequence, and smallest useful next step.
-Separate demonstrated defects, proposed improvements, and unresolved uncertainty.
-Recommend outside-handbook corrections without making them. A clean review does
-not prove agent compliance, successful execution, or correctness of the underlying work.
+Base a finding about upkeep on evidence: guidance that conflicts, a broken reference, a stated replacement, an observed failure, a changed requirement, or a script that does not do what its Playbook says. Age, or missing data about use, shows nothing. A claim that a method works needs evidence.
+
+## The findings
+
+In the report's second item, state the scope and what you covered, then each finding with its path, evidence, consequence for the work and smallest useful next step for the user. Group them as shown defects (a contradiction, a false statement, a broken link), decisions the owner has not made, proposed improvements (missing orientation among them) and open uncertainty.

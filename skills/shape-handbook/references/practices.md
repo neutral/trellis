@@ -1,40 +1,15 @@
-# Shape working practices
+# Write a Practice
 
-Practices explain how to understand, organize, approach, and maintain work in the
-area. They can establish ownership, useful distinctions, writing conventions,
-method selection, and interpretation of evidence. A practice belongs when it
-changes a real working decision; generic advice earns no place merely by being true.
+A Practice says how to approach a kind of work in this area: who is responsible for what, which distinctions matter, how to write, which method to choose, how to read evidence. It earns its place when it changes a real decision; advice that is merely true does not.
 
-Read current guidance and selected area sources before choosing what to preserve.
-Separate the current work from the method of doing it. A writing brief records an
-article's audience, purpose, and key points; a practice can explain how to develop
-and review a brief. For a document mixing meeting guidance with a current task
-list, judge each statement: preserve the reusable guidance and leave the task list
-with the work. Recommend cleanup of files outside the handbook without changing them.
+## What makes a rule adopted
 
-Explicit owner direction can establish a convention without successful examples.
-Applicable existing instructions provide evidence of adopted conventions. Repeated
-behavior can motivate a proposal but does not prove adoption, value, or causality.
-Keep consequential inferences visibly proposed until adopted. Distinguish observed
-behavior, stated intent, and interpretation; preserve useful current rationale
-without retaining a discovery history.
+Existing instructions are evidence of what has been adopted. Repeated behavior can prompt a proposal; it does not show that a rule was adopted, that it helps or what caused a result. Keep apart what was observed, what was intended and what you interpret. Do not turn an incidental example, or the way files happen to be arranged, into policy.
 
-Organize `practices/` around coherent concerns or reader questions. Update the
-existing owner rather than making a parallel account. Explain applicability, the
-considerations that change action, and consequential exceptions. Readers should
-not need the original conversation or a prescribed lesson sequence.
+## Where it goes
 
-A concern may also need an independent check or a useful template. Coordinate those
-changes when they serve the requested refinement, linking each artifact's owner
-rather than copying its meaning. Do not turn a broad improvement request into
-unrequested Playbook creation. For relevant changes, also read
-[Checks](checks.md) or [Playbooks](playbooks.md).
+Use `practices/<name>.md`, one file per concern or reader question. Say when the Practice applies, what should change the reader's action and which exceptions matter. Keep each detail in the one file that holds it and the way in short, so that a reader can start where the task requires, with no set reading order.
 
-Adapt [the practice starter](../assets/practice.md) or an applicable local template
-when helpful. Its headings are optional. Add a local template only for a concrete
-reuse benefit; do not generalize incidental examples into policy.
+When the request also needs a Check, change both and link them instead of repeating either: see [Checks](checks.md).
 
-Before finishing, check whether a future contributor can make the relevant decision,
-whether readers can distinguish proposed from adopted guidance, and whether
-related checks, templates, and navigation still agree. Keep the work's requirements
-and findings in their authoritative files.
+[This skill's Practice starter](../assets/practice.md) gives a first shape.

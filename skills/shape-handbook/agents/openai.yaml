@@ -1,4 +1,4 @@
 interface:
   display_name: "Shape Handbook"
-  short_description: "Create, review, and refine area handbooks"
-  default_prompt: "Use $shape-handbook to create, review, or refine the selected handbook according to my request."
+  short_description: "Write down how work is done and checked"
+  default_prompt: "Use $shape-handbook to write down how we do this work, so the next person can follow it."
