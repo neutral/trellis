@@ -1,5 +1,7 @@
 # Trellis
 
+> Trellis has moved to [github.com/methodologies/trellis](https://github.com/methodologies/trellis); add the plugin from there. This repository is archived; it keeps Trellis's history through 1.0.0.
+
 **Keep the guidance agents need close to the work they do.**
 
 Trellis keeps the working method for an area of work in a handbook beside that
